@@ -3,6 +3,9 @@ GameMode_Hard = 1
 GameMode_Greedy = 2
 GameMode_Greedier = 3
 
+ROOMTYPE_OTHER = 0
+ROOMTYPE_SUPERSECRET = 8
+
 HeartNames = {
     "5.10.1":"红心",
     "5.10.2":"半红心",
@@ -242,11 +245,13 @@ function GetRedHeartProb(
     IsAchievementUnlocked   /* function(achievement_id) => bool */,
     HasCollectible          /* function(collectible_id) => bool */,
     HasTrinket              /* function(trinket_id)=>bool */,
-    HasMomBox               /* bool */, 
+    TrinketCountIsTwo               /* function(trinket_id)=>bool */, 
     PlayerIs                /* function(player_id) => bool */, 
-    RoomType                /* integer */)
+    RoomType                /* integer */,
+    RoomId /* integer, only used in SUPER_SEGRET_ROOM */)
     {
     IsHard = GameMode_Hard == GameMode || GameMode_Greedier == GameMode
+    IsGreddyOrGredier = GameMode == GameMode_Greedy || GameMode == GameMode_Greedier
     let psc = new ProgramStatusCollection()
     psc.add_status(new ProgramStatus(BoolRate(true)))
     psc
@@ -272,7 +277,7 @@ function GetRedHeartProb(
     )
     .do_if(
         ()=>RndRate(50).or(
-            BoolRate(HasTrinket(18)).and(RndRate(30/(HasMomBox ? 2 : 1)))
+            BoolRate(HasTrinket(18)).and(RndRate(30/(TrinketCountIsTwo(18) ? 2 : 1)))
             ).or(
                 BoolRate(HasCollectible(238)).and(RndRate(40))
             ).or(
@@ -286,7 +291,7 @@ function GetRedHeartProb(
         ()=>RndRate(10).or(
             BoolRate(HasCollectible(173)).and(RndRate(3))
         ).or(
-            BoolRate(HasTrinket(38)).and(RndRate(30/(HasMomBox ? 2 : 1)))
+            BoolRate(HasTrinket(38)).and(RndRate(30/(TrinketCountIsTwo(38) ? 2 : 1)))
         ).or(
             BoolRate(PlayerIs(5)).and(RndRate(16))
         )).apply((c)=>c.SubType = 3)
@@ -299,7 +304,7 @@ function GetRedHeartProb(
         c=>c.SubType = 11
     ).do_if(
         c=>RndRate(20).or(
-            BoolRate(HasTrinket(17)).and(RndRate(10/(HasMomBox ? 2 : 1)))
+            BoolRate(HasTrinket(17)).and(RndRate(10/(TrinketCountIsTwo(17) ? 2 : 1)))
         ),
         c=>c.SubType = 6
     ).do_if(
@@ -313,19 +318,54 @@ function GetRedHeartProb(
         c=>c.SubType = 7
     )
     psc.do_if(
-        c=>BoolRate(HasTrinket(22) && RoomType != 8),
+        c=>BoolRate(HasTrinket(22) && RoomType != ROOMTYPE_SUPERSECRET),
         c=>c.SubType = 6
     )
 
     //此后处理Variant不为0的情况
 
     if(RoomType == 8)
-        throw new Error("暂不支持超级隐藏的掉落预测")
-
-    psc.do_if(
-        c=>BoolRate(c.SubType == 2 && HasTrinket(87)),
-        c=>c.SubType = 1
-    )
+    {
+        if(RoomId == 0){
+            psc.apply(c=>c.SubType = 1)
+        }else{
+            if(IsGreddyOrGredier){
+                if(RoomId == 4){
+                    psc.apply(c=>c.SubType = 3)
+                }else if(RoomId == 24){
+                    psc.apply(c=>c.SubType=4)
+                }else if(RoomId == 25){
+                    psc.apply(c=>c.SubType = 2)
+                    if(HasTrinket(87)){
+                        psc.apply(c=>c.SubType = 1)
+                    }
+                }else if(RoomId == 5){
+                    psc.apply(c=>c.SubType=6)
+                }else{
+                    psc.do_if(
+                        c=>BoolRate(c.SubType == 2 && HasTrinket(87)),
+                        c=>c.SubType = 1
+                    )    
+                }
+            }else{
+                if(RoomId == 1)
+                    psc.apply(c=>c.SubType=4)
+                else if(RoomId == 6)
+                    psc.apply(c=>c.SubType = 6)
+                else{
+                    psc.do_if(
+                        c=>BoolRate(c.SubType == 2 && HasTrinket(87)),
+                        c=>c.SubType = 1
+                    )    
+                }
+            }
+        }
+    }else{
+        psc.do_if(
+            c=>BoolRate(c.SubType == 2 && HasTrinket(87)),
+            c=>c.SubType = 1
+        )    
+    }
 
 
     //处理其它分支
@@ -384,22 +424,45 @@ function PrintResult(){
             }
             return false
         },
-        document.getElementById('mombox').checked,
+        (tid)=>{
+            if(document.getElementById('mombox').checked)
+                return true
+            
+            item = document.getElementById('trinket_double_'+tid)
+            if(item){
+                return 2==+item.value
+            }
+            return false
+    
+        },
         (pid)=>{
-            return pid == +document.getElementById('PlayerID').value
-        },1)
+            item = document.getElementById('player_'+pid)
+            if(item){
+                return item.checked
+            }
+            return false
+
+            //return pid == +document.getElementById('PlayerID').value
+        },
+        +document.getElementById('GameRoom').value,
+        +document.getElementById('SuperSecretRoomId').value
+        )
 
     let txt = ''
     for(let i=1;i<=12;i++){
         let k = '5.10.'+i
         txt += k + "\t" + HeartNames[k] + "\t"
+        let result_rate = BoolRate(false)
+        if(result[k]){
+            result_rate = result[k].rate
+        }
         if(document.getElementById('output_div').checked){
-            txt += result[k].rate.a + "/" + result[k].rate.b
+            txt += result_rate.a + "/" + result_rate.b
         }else{
-            txt += result[k].rate.number
+            txt += result_rate.number
         }
         if(document.getElementById('output_expr').checked)
-            txt += "=" + result[k].rate.expr
+            txt += "=" + result_rate.expr
         txt += '\n'
     }
     document.getElementById('output').value = txt
