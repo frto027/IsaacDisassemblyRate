@@ -497,10 +497,24 @@ const CHART_COLORS = {
   ];
   
 let labels = []
-let colors = []
+let colors = [
+    'rgb(192,53,73)',//1
+    'rgb(126,35,49)',
+    'rgb(109,114,178)',//3
+    'rgb(198,194,213)',
+    'rgb(143,41,138)',
+    'rgb(67,67,67)',//6
+    'rgb(255,255,135)',
+    'rgb(56,82,107)',
+    'rgb(200,91,45)',
+    'rgb(19,189,255)',//10
+    'rgb(238,238,238)',
+    'rgb(146,160,84)',
+    
+]
 for(let i=1;i<=12;i++){
     labels.push(HeartNames['5.10.'+i])
-    colors.push(NAMED_COLORS[i%NAMED_COLORS.length])
+    // colors.push(NAMED_COLORS[i%NAMED_COLORS.length])
 }
 
 const data = {
