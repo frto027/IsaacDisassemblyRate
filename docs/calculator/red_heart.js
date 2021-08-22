@@ -358,7 +358,7 @@ function PrintResult(){
         },1)
 
     let txt = ''
-    for(let i=1;i<12;i++){
+    for(let i=1;i<=12;i++){
         let k = '5.10.'+i
         txt += k + "\t" + HeartNames[k] + "\t"
         if(document.getElementById('output_div').checked){
