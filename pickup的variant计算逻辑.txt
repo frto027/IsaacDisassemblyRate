@@ -1,0 +1,82 @@
+约定：
+WeightList.Add(Value,Weight)
+表示将数值Value按照Weight的权重放到WeightList列表中
+
+WeightList.SelectRandomItem()从列表中按照各值的权重随机选择一个值
+
+下面是spawn 5指令的部分行为：
+
+if(Variant == 0){
+    //这里处理spawn 5.0.x
+    WeightList = new WeightList()
+
+    if(SubType != 3){
+        WeightList.Add(20,20)
+    }
+
+    WeightList.Add(10,15)
+    WeightList.Add(30,15)
+    WeightList.Add(40,15)
+    if(SubType != 1 && SubType != 3 && SubType != 4){
+        WeightList.Add(50,5)
+        WeightList.Add(60,5)
+        WeightList.Add()
+    }//276行
+
+    WeightList.Add(70,4)
+    WeightList.Add(300,4)
+    WeightList.Add(90,2)
+
+    if(SubType != 4){
+        WeightList.Add(350,1)
+    }
+
+    if(SubType == 0){
+        WeightList.Add(100,1)
+    }
+
+    Variant = WeightList.SelectRandomItem()
+
+
+    //Variant初始值已经生成，但还会有概率变化
+
+    if(Variant == 10 && HasTrinket(22)){
+        if(RandInt(5) != 0){
+            if(SubType != 3){
+                WeightList2.Add(20,20)
+            }
+            WeightList2.Add(30,15)
+            WeightList2.Add(40,15)
+            WeightList2.Add(10,15)
+            Variant = WeightList2.SelectRandomItem()
+        }//497行
+    }
+    rndDouble = RandomDouble() /* rndDouble是0~1之间的小数 */
+    if(SubType == 3 || Variant == 20 || ! HasTrinket(84) || rndDouble >= 0.1){
+        if(Variant != 90 && HasTrinket(72) && rndDouble >= 0.1 && rndDouble < 0.2){
+            Variant = 90
+        }
+    }else{
+        Variant = 20
+    }
+}
+//等价于spawn 5.Variant.x
+StarterDeckEffect = HasCollectible(251)
+LittleBaggyEffect = HasCollectible(252)
+if(StarterDeckEffect && LittleBaggyEffect){
+    LittleBaggyEffect = false
+}
+
+if(Variant == 70 && StarterDeckEffect){
+    Variant = 300
+    SubType = 0
+}
+if(Variant == 300 && LittleBaggyEffect){
+    Variant = 70
+    SubType = 0
+}
+
+//到此结束，后续是根据Variant而异的生成
+switch(Variant){
+...
+}

@@ -1,0 +1,181 @@
+spawn 5.10.0的逻辑：
+
+逻辑A：目前不知道是什么，和游戏的状态（主菜单/游戏中/过场动画和其它逻辑东西有关，只要全成就就不用管）
+约定RandInt(10)产生0~9的随机数
+
+可以计算一下困难模式生成5.10.1和5.10.2的概率：
+1/2 * 49/50 * 49/50 * 99/100 * 99/100 * 49/50 * 9/10 * 159/160 = 1650054401919/4000000000000
+
+switch(Variant){
+    case 10:
+    {
+        if(SubType == 0){
+            //此分支给5.100.0补充SubType
+            SubType = 1
+            if(RandInt(2) == 0){
+                SubType = 2
+            }
+            if(RandInt(IsHard ? 50 : 20) == 0){
+                SubType = 5
+            }
+            
+            if(
+                RandInt(50) == 0 &&
+                (achievement_unlocked[411] || 逻辑A)
+            ){
+                SubType = 12
+            }
+            if(
+                RandInt(100) == 0 &&
+                (achievement_unlocked[328] || 逻辑A)
+            ){
+                SubType = 9
+            }
+            if(RandInt(100) == 0){
+                SubType = 10
+            }
+            if(
+                RandInt(50) == 0 ||
+                HasTrinket(18) && RandInt(30 / TrinketCount(18)) == 0 ||
+                HasCollectible(238) && RandInt(40) == 0 ||
+                HasCollectible(239) && RandInt(40) == 0
+            ){
+                SubType = 4
+            }
+
+            if(
+                RandInt(10) == 0 ||
+                HasCollectible(173) && RandInt(3) == 0 ||
+                HasTrinket(38) && RandInt(10 / TrinketCount(38)) == 0 ||
+                PlayerIs(5) && RandInt(16) == 0
+            ){
+                SubType = 3
+                if(RandInt(4) == 0 && (achievement_unlocked[33] || 逻辑A)){
+                    SubType = 8
+                }
+                if(RandInt(20) == 0 && (achievement_unlocked[391] || 逻辑A)){
+                    SubType = 11
+                }
+                if(
+                    RandInt(20) == 0 ||
+                    HasTrinket(17) && RandInt(10 / TrinketCount(17))
+                ){
+                    SubType = 6
+                }
+                if(RandInt(5) == 0){
+                    if(PlayerIs(16) || PlayerIs(17)){
+                        SubType = 11
+                    }
+                }
+            }
+
+            if(RandInt(160) == 0 && (achievement_unlocked[224] || 逻辑A)){
+                SubType = 7
+            }
+
+            if(HasTrinket(22) && RoomType != ROOM_SUPERSECRET){
+                SubType = 6
+            }
+        }
+        //这里处理超级隐藏和妈妈的吊坠，注意此时随机过程已经结束了
+        if(RoomType == ROOM_SUPERSECRET){
+            //718行继续
+            if(room_id == 0){//房间ID就是debug 5看到的id
+                SubType = 1
+            }else
+            {
+                if(IsGreddyOrGredierMode()){//贪婪模式或超级贪婪
+                    if(room_id == 4){
+                        SubType = 3
+                    }else if(room_id == 24){
+                        SubType = 4
+                    }else if(room_id == 25){
+                        SubType = 2
+                        if(HasTrinket(87)){
+                            SubType = 1
+                        }
+                    }else if(room_id == 5){
+                        SubType = 6
+                    }else{
+                        if(SubType == 2 && HasTrinket(87)){
+                            SubType = 1
+                        }
+                    }
+                }else{
+                    if(room_id == 1){
+                        SubType = 4
+                    }else if(room_id == 6){
+                        SubType = 6
+                    }else{
+                        if(SubType == 2 && HasTrinket(87)){
+                            SubType = 1
+                        }
+                    }
+                }
+            }
+        }else{
+            if(SubType == 2 && HasTrinket(87)){
+                SubType = 1
+            }
+        }
+
+        //5.10部分处理结束，之后是类型为5的内容
+    }
+    goto LABEL 373;
+    break;
+    /* 其它case分支 */
+}
+
+
+LABEL 373:
+if((
+    HasCollectible(203) && (SpawnSeed & 0x8000 == 0) || /* 假定SpawnSeed均匀分配，后者可以认为是1/2的概率条件 */
+    Variant == 40 && HasCollectible(250)
+    )
+    && !isLoadingRoom
+    ){
+        if(Variant == 10 && (SubType == 1 || SubType == 9))
+            SubType = 5
+        if (Variant == 20 && SubType == 1 )
+            SubType = 4;
+        if ( Variant == 30 && SubType == 1 )
+            SubType = 3;
+        if ( Variant == 40 && SubType == 1 )
+            SubType = 2;
+    }
+
+if(ChallengeID == 25 && Variant == 10){
+     if ( SubType == 1 || SubType == 2 || SubType == 5 || SubType == 10 || SubType == 9 || SubType == 12 )
+    {
+      Variant = 20;
+      if ( SubType == 1 )
+        SubType = 4;
+      else if(SubType == 5){
+          SubType = 2
+      }else{
+          SubType = 1
+      }
+    }
+}
+
+if(ChallengeID == 41 && !isLoadingRoom && Variant == 100){
+    //这块不管了
+}
+
+if(ChallengeID == 43){
+    if(!isLoadingRoom && Variant == 100 && !未知条件3EDE80(SubType)){
+        Variant = 300
+        SubType = 1
+    }
+    if(Variant == 300 || Variant == 70 || Variant == 90){
+        Variant = 300
+        SubType = 1
+    }
+}
+
+if(Variant == 40 && 未知条件62C110(SubType)){
+    Variant = 42
+    SubType = 1
+}
+// ...省略无关逻辑
+

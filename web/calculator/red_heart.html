@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script type="text/javascript" src="red_heart.js"></script>
+
+        控制台指令：spawn 5.10<br>
+        
+        游戏模式：<select id="GameMode">
+            <option value="0">Normal</option>
+            <option value="1" selected>Hard</option>
+            <option value="2">Greed</option>
+            <option value="3">Greedire</option>
+        </select><br>
+
+
+        角色：<select id="PlayerID">
+            <option value="-1" selected>其它</option>
+            <option value="5">5  夏娃</option>
+            <option value="16">16 遗骸</option>
+            <option value="17">17 遗骸之魂</option>
+        </select><br>
+
+        <input type="checkbox" id="achieve_33" checked>33成就已解锁 一切都好可怕！！！<br>
+        <input type="checkbox" id="achieve_224" checked>224成就已解锁 金心<br>
+        <input type="checkbox" id="achieve_391" checked>391成就已解锁 骨心<br>
+        <br>
+        <input type="checkbox" id="collect_173">道具173 主教冠<br>
+        <input type="checkbox" id="collect_203">道具203 捆绑包<br>
+        <input type="checkbox" id="collect_238">道具238 钥匙碎片1<br>
+        <input type="checkbox" id="collect_239">道具239 钥匙碎片2<br>
+        <!--input type="checkbox" id="collect_250">道具250<br>炸弹不考虑 -->
+        <br>
+        <input type="checkbox" id="trinket_17">饰品17 黑口红<br>
+        <input type="checkbox" id="trinket_18">饰品18 圣言册<br>
+        <input type="checkbox" id="trinket_22">饰品22 恶魔尾巴<br>
+        <input type="checkbox" id="trinket_38">饰品38 妈妈的珍珠<br>
+        <input type="checkbox" id="trinket_87">饰品87 妈妈的吊坠<br>
+        <br>
+        <input type="checkbox" id="mombox">妈妈的盒子<br>
+
+        <input type="checkbox" id='output_div' checked>输出分数<br>
+        <button onclick="PrintResult()">计算</button><br>
+        <textarea id="output" style="width: 500px;height: 300px;" ></textarea>
+
+    </body>
+</html>
