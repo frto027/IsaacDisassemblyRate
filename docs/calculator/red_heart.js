@@ -19,11 +19,15 @@ HeartNames = {
 }
 
 class Rate{
-    constructor(a,b){
+    constructor(a,b,expr){
         //a是分子，b是分母
         this.a = a
         this.b = b
         this.number = Number(a)/Number(b)
+        if(expr == undefined)
+            this.expr = a + "/" + b
+        else
+            this.expr = expr
     }
     simple(){
 
@@ -46,17 +50,45 @@ class Rate{
         return this
     }
     add(other){
-        return new Rate(this.a * other.b + this.b * other.a, this.b * other.b).simple()
+        let expr
+        if(this.a == 0){
+            expr = other.expr
+        }else if(other.a == 0){
+            expr = this.expr
+        }else{
+            expr = `(${this.expr})+(${other.expr})`
+        }
+        return new Rate(this.a * other.b + this.b * other.a, this.b * other.b, expr).simple()
     }
     mul(other){
-        return new Rate(this.a*other.a, this.b*other.b).simple()
+        let expr
+        if(this.a == this.b){
+            expr = other.expr
+        }else if(other.a == other.b){
+            expr = this.expr
+        }else{
+            expr = `(${this.expr})+(${other.expr})`
+        }
+        return new Rate(this.a*other.a, this.b*other.b, expr).simple()
     }
     sub(other){
-        return new Rate(this.a * other.b - this.b * other.a, this.b * other.b).simple()
+        let expr
+        if(other.a == 0){
+            expr = this.expr
+        }else{
+            expr = `(${this.expr})-(${other.expr})`
+        }
+        return new Rate(this.a * other.b - this.b * other.a, this.b * other.b, expr).simple()
     }
 
     not(){
-        return new Rate(this.b - this.a, this.b)
+        let expr
+        if(this.a == 0){
+            expr = "1"
+        }else{
+            expr = `1-(${this.expr})`
+        }
+        return new Rate(this.b - this.a, this.b,expr)
     }
     and(other){
         return this.mul(other)
@@ -366,6 +398,8 @@ function PrintResult(){
         }else{
             txt += result[k].rate.number
         }
+        if(document.getElementById('output_expr').checked)
+            txt += "=" + result[k].rate.expr
         txt += '\n'
     }
     document.getElementById('output').value = txt
