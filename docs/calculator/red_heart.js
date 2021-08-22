@@ -458,9 +458,9 @@ function PrintResult() {
         //add to chart
         {
             labels[i-1] = HeartNames['5.10.'+i]
-            if((data.datasets[0].data[i-1] || -1) > result_rate.number){
+            if((data.datasets[0].data[i-1] == undefined ? -1 : data.datasets[0].data[i-1]) > result_rate.number){
                 labels[i-1] += '↓'
-            }else if((data.datasets[0].data[i-1] || 2) < result_rate.number){
+            }else if((data.datasets[0].data[i-1] == undefined ? 2 : data.datasets[0].data[i-1]) < result_rate.number){
                 labels[i-1] += '↑'
             }
             data.datasets[0].data[i-1] = result_rate.number
