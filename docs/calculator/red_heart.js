@@ -457,6 +457,12 @@ function PrintResult() {
 
         //add to chart
         {
+            labels[i-1] = HeartNames['5.10.'+i]
+            if((data.datasets[0].data[i-1] || -1) > result_rate.number){
+                labels[i-1] += '↓'
+            }else if((data.datasets[0].data[i-1] || 2) < result_rate.number){
+                labels[i-1] += '↑'
+            }
             data.datasets[0].data[i-1] = result_rate.number
         }
         //add text 
@@ -477,25 +483,6 @@ function PrintResult() {
 }
 
 //draw chart
-const CHART_COLORS = {
-    red: 'rgb(255, 99, 132)',
-    orange: 'rgb(255, 159, 64)',
-    yellow: 'rgb(255, 205, 86)',
-    green: 'rgb(75, 192, 192)',
-    blue: 'rgb(54, 162, 235)',
-    purple: 'rgb(153, 102, 255)',
-    grey: 'rgb(201, 203, 207)'
-  };
-  const NAMED_COLORS = [
-    CHART_COLORS.red,
-    CHART_COLORS.orange,
-    CHART_COLORS.yellow,
-    CHART_COLORS.green,
-    CHART_COLORS.blue,
-    CHART_COLORS.purple,
-    CHART_COLORS.grey,
-  ];
-  
 let labels = []
 let colors = [
     'rgb(192,53,73)',//1
@@ -512,11 +499,9 @@ let colors = [
     'rgb(146,160,84)',
     
 ]
-for(let i=1;i<=12;i++){
-    labels.push(HeartNames['5.10.'+i])
-    // colors.push(NAMED_COLORS[i%NAMED_COLORS.length])
-}
-
+// for(let i=1;i<=12;i++){
+//     labels.push(HeartNames['5.10.'+i])
+// }
 const data = {
     labels: labels,
     datasets: [
