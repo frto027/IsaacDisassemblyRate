@@ -8,14 +8,14 @@
 
         控制台指令：spawn 5.10<br>
         
-        游戏模式：<select id="GameMode">
+        <label for="GameMode">游戏模式：</label><select id="GameMode">
             <option value="0">Normal</option>
             <option value="1" selected>Hard</option>
             <option value="2">Greed</option>
             <option value="3">Greedier</option>
         </select><br>
 
-        游戏房间：<select id="GameRoom"><option value="0" selected>其它</option><option value="8">超级隐藏</option></select><br>
+        <label for="GameRoom">游戏房间：</label><select id="GameRoom"><option value="0" selected>其它</option><option value="8">超级隐藏</option></select><br>
         超级隐藏房间ID：<select id="SuperSecretRoomId">
             <option value="0">0</option>
             <option value="1">1</option>
@@ -28,31 +28,31 @@
         </select>
         <br>
         游戏在场的角色：<br>
-        <input type="checkbox" id="player_other" checked>其它（无影响）<br>
-        <input type="checkbox" id="player_5">5  夏娃<br>
-        <input type="checkbox" id="player_16">16 遗骸<br>
-        <input type="checkbox" id="player_17">17 遗骸之魂<br>
+        <input type="checkbox" id="player_other" checked><label for="player_other">其它（无影响）</label><br>
+        <input type="checkbox" id="player_5"><label for="player_5">5  夏娃</label><br>
+        <input type="checkbox" id="player_16"><label for="player_16">16 遗骸</label><br>
+        <input type="checkbox" id="player_17"><label for="player_17">17 遗骸之魂</label><br>
         <br>
-        <input type="checkbox" id="achieve_33" checked>33成就已解锁 一切都好可怕！！！<br>
-        <input type="checkbox" id="achieve_224" checked>224成就已解锁 金心<br>
-        <input type="checkbox" id="achieve_391" checked>391成就已解锁 骨心<br>
+        <input type="checkbox" id="achieve_33" checked><label for="achieve_33">成就已解锁 一切都好可怕！！！</label><br>
+        <input type="checkbox" id="achieve_224" checked><label for="achieve_224">224成就已解锁 金心</label><br>
+        <input type="checkbox" id="achieve_391" checked><label for="achieve_391">391成就已解锁 骨心</label><br>
         <br>
-        <input type="checkbox" id="collect_173">道具173 主教冠<br>
-        <input type="checkbox" id="collect_203">道具203 捆绑包<br>
-        <input type="checkbox" id="collect_238">道具238 钥匙碎片1<br>
-        <input type="checkbox" id="collect_239">道具239 钥匙碎片2<br>
+        <input type="checkbox" id="collect_173"><label for="collect_173">道具173 主教冠</label><br>
+        <input type="checkbox" id="collect_203"><label for="collect_203">道具203 捆绑包</label><br>
+        <input type="checkbox" id="collect_238"><label for="collect_238">道具238 钥匙碎片1</label><br>
+        <input type="checkbox" id="collect_239"><label for="collect_239">道具239 钥匙碎片2</label><br>
         <!--input type="checkbox" id="collect_250">道具250<br>炸弹不考虑 -->
         <br>
-        <input type="checkbox" id="trinket_17">饰品17 黑口红 &nbsp;<select id="trinket_double_17"><option value="1" selected>一个</option><option value="2">两个或以上</option></select><br>
-        <input type="checkbox" id="trinket_18">饰品18 圣言册 &nbsp;<select id="trinket_double_18"><option value="1" selected>一个</option><option value="2">两个或以上</option></select><br>
-        <input type="checkbox" id="trinket_22">饰品22 恶魔尾巴 &nbsp;<select id="trinket_double_22"><option value="1" selected>一个</option><option value="2">两个或以上</option></select><br>
-        <input type="checkbox" id="trinket_38">饰品38 妈妈的珍珠 &nbsp;<select id="trinket_double_38"><option value="1" selected>一个</option><option value="2">两个或以上</option></select><br>
-        <input type="checkbox" id="trinket_87">饰品87 妈妈的吊坠 &nbsp;<select id="trinket_double_87"><option value="1" selected>一个</option><option value="2">两个或以上</option></select><br>
+        <input type="checkbox" id="trinket_17"><label for="trinket_17">饰品17 黑口红</label> &nbsp;<select id="trinket_double_17"><option value="1" selected>一个</option><option value="2">两个或以上</option></select><br>
+        <input type="checkbox" id="trinket_18"><label for="trinket_18">饰品18 圣言册</label> &nbsp;<select id="trinket_double_18"><option value="1" selected>一个</option><option value="2">两个或以上</option></select><br>
+        <input type="checkbox" id="trinket_22"><label for="trinket_22">饰品22 恶魔尾巴</label> &nbsp;<select id="trinket_double_22"><option value="1" selected>一个</option><option value="2">两个或以上</option></select><br>
+        <input type="checkbox" id="trinket_38"><label for="trinket_38">饰品38 妈妈的珍珠</label> &nbsp;<select id="trinket_double_38"><option value="1" selected>一个</option><option value="2">两个或以上</option></select><br>
+        <input type="checkbox" id="trinket_87"><label for="trinket_87">饰品87 妈妈的吊坠</label> &nbsp;<select id="trinket_double_87"><option value="1" selected>一个</option><option value="2">两个或以上</option></select><br>
         <br>
-        <input type="checkbox" id="mombox">妈妈的盒子<br>
+        <input type="checkbox" id="mombox"><label for="mombox">妈妈的盒子</label><br>
 
-        <input type="checkbox" id='output_div' checked>输出分数<br>
-        <input type="checkbox" id="output_expr">输出计算过程<br>
+        <input type="checkbox" id='output_div' checked><label for="output_div">输出分数</label><br>
+        <input type="checkbox" id="output_expr"><label for="output_expr">输出计算过程</label><br>
         <button onclick="PrintResult()">计算</button><br>
         <textarea id="output" style="width: 500px;height: 300px;" ></textarea>
 
