@@ -5,6 +5,35 @@
 // 
 // 此程序性能严重依赖编译优化，建议使用Release x64编译，且不要调试执行，来确保程序性能
 #include <iostream>
+#include <Windows.h>
+
+//下面两个变量控制当前脚本的多线程计算方式
+
+//128线程
+//#define THREAD_STEP 0x2000000
+//#define MAX_THREAD_COUNT 128
+
+//64线程
+//#define THREAD_STEP 0x4000000
+//#define MAX_THREAD_COUNT 64
+
+//32线程
+//#define THREAD_STEP 0x8000000
+//#define MAX_THREAD_COUNT 32
+
+
+//16线程
+#define THREAD_STEP 0x10000000
+#define MAX_THREAD_COUNT 16
+
+//8线程
+//#define THREAD_STEP 0x20000000
+//#define MAX_THREAD_COUNT 8
+
+//单线程
+//#define THREAD_STEP 0x100000000
+//#define MAX_THREAD_COUNT 1
+
 //使用模板类来加速执行，达到最佳机器优化
 template<int a,int b,int c>
 class RNG {
@@ -46,22 +75,62 @@ inline int GetGoldPennyCount(uint32_t seed) {
     return count + 1;
 }
 
-int main()
-{
-    int maxseed = 0;
-    int max_num = GetGoldPennyCount(1);
-    //单核足够了
-    for (long long i = 1; i < 0x100000000; i++) {
-        if (i % 0x10000000 == 0) {
-            printf("%lld/16\n", i / 0x10000000);
-        }
-        int c = GetGoldPennyCount(i);
-        if (c > max_num) {
-            max_num = c;
-            maxseed = i;
-            printf("seed:%u,num:%d\n", maxseed, max_num);
+
+HANDLE seedMutex;
+int maxseed = 0;
+int max_num = 0;
+
+DWORD TestSeed(LPVOID arr) {
+    long long* a =(long long*) arr;
+    for (long long i = a[0]; i < a[1]; i++) {
+        int count = GetGoldPennyCount(i);
+        if (count > max_num) {
+            if (WaitForSingleObject(seedMutex, INFINITE) != WAIT_OBJECT_0) {
+                exit(-1);
+            }
+
+            if (count > max_num) {
+                max_num = count;
+                maxseed = i;
+                printf("seed:%u,num:%d\n", maxseed, max_num);
+            }
+
+            ReleaseMutex(seedMutex);
         }
     }
+    delete arr;
+}
+
+int main()
+{
+    
+    HANDLE threads[MAX_THREAD_COUNT];
+    
+    seedMutex = CreateMutex(NULL, FALSE, NULL);
+    long long thread_count = 0;
+    for (long long i = 0; i < 0x100000000; i += THREAD_STEP) {
+        if (thread_count >= MAX_THREAD_COUNT) {
+            printf("no enough thread!");
+            exit(-1);
+        }
+        long long* arr = new long long[2];
+        arr[0] = i;
+        arr[1] = i + THREAD_STEP;
+        if (arr[0] == 0) {
+            arr[0]++;
+        }
+        threads[thread_count] = CreateThread(NULL, 0, TestSeed, arr, 0, NULL);
+        if (threads[thread_count] == NULL) {
+            printf("create thread failed!");
+        }
+        thread_count++;
+    }
+    WaitForMultipleObjects(thread_count, threads, TRUE, INFINITE);
+
+    for (int i = 0; i < thread_count; i++) {
+        CloseHandle(threads[i]);
+    }
+    CloseHandle(seedMutex);
     return 0;
 }
 /**
