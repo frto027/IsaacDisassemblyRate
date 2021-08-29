@@ -1,0 +1,64 @@
+
+if(variant != 53 || stage_id == 11 ||  ! chest_is_first_open /* the last is guessed */ || RandInt(4) != 0){
+    //label 57
+    switch(variant){
+        case 56:
+            // dont care
+            List = new List
+            List.Add(0,2)
+            List.Add(1,10) //意思是值为1，权重为10
+            List.Add(2,10)
+            result = List.SelectRandom()
+            count = RandInt(2) + 2
+            if(result == 0 && RandInt(3) == 0){
+                //492
+                if(HasTrinket(45) && RandInt(2) == 0){
+                    spawn(5,300,0)      
+                }else{
+                    if(HasTrinket(44) && RandInt(2) == 0){
+                        spawn(5,70,0)
+                    }
+                }
+                if(HasTrinket(42)){
+                    count++
+                }
+            }
+            LABEL 86
+            if(HasCollectible(199)){
+                count *= 2
+            }
+            if(HasTrinket(76)){
+                count *= RandInt(2) != 0 ? 0 : 2
+            }
+            result = List.SelectRandom()
+            if(result == 0){
+                spawn(5,100,ItemPool:GetCollectible(...))
+            }else if(result == 1){
+                for(int i=0;i<count;i++){
+                    spawn(5,300,0)
+                }
+            }else if(result == 2){
+                for(int i=0;i<count;i++){
+                    spawn(5,70,0)
+                }
+            }
+            //553
+            if(count == 0){
+                spawn(18,0,0)
+            }
+            return;
+        case 360:
+            //dk
+        
+        case 390:
+            //dk
+        case 55:
+            //dk
+        case 69:
+            //dk
+    }
+    //something dk
+
+
+
+}
