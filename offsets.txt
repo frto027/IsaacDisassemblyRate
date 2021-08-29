@@ -3,5 +3,6 @@ Game[0] stage
 Game[28100] trinket_rng_list_begin
 Game[28101] trinket_rng_list_end
 Game[691002] Difficult 0 1 2 3
-
+Game[24664] init_room_it
+[24677] current_room_id
 entity_pickup + 44 Variant

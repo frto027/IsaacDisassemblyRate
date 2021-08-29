@@ -1,5 +1,5 @@
-
-if(variant != 53 || stage_id == 11 ||  ! chest_is_first_open /* the last is guessed */ || RandInt(4) != 0){
+//GenerateChestDropList
+if(variant != 53 || stage_id == 11 ||  ! chest_is_first_open /* maybe */ || RandInt(4) != 0){
     //label 57
     switch(variant){
         case 56:
@@ -49,16 +49,103 @@ if(variant != 53 || stage_id == 11 ||  ! chest_is_first_open /* the last is gues
             return;
         case 360:
             //dk
-        
+            if(stage_id == 11 && current_room_id == init_room_id){
+                spawn(5,100,ItemPool::GetCollectible())
+                return
+            }
+            List = new List
+            List.Add(0,10)
+            if(current_room_id != devil_room_id()){ //devil_room_id函数中使用了RNG，猜测可能影响恶魔/天使房
+                List.Add(1,5)
+            }
+            List.Add(2,13)
+            List.Add(3,13)
+            List.Add(4,7)
+            List.Add(5,7)
+            List.Add(6,HasTrinket(22)? 3 : 15)
+            List.Add(7,15)
+            List.Add(8,15)
+            switch(List.SelectRandom()){
+                case 0:
+                    spawn(5,100,ItemPool::GetCollectible(...))
+                    break
+                case 1:
+                    //运行发现，去了恶魔房
+                    ...
+                    break
+                case 2:
+                    spawn(85,0,0)
+                    spawn(85,0,0)
+                    break
+                case 3:
+                    spawn(4,4,0)
+                    break
+                case 4:
+                    spawn(3,43,0)
+                    spawn(3,43,0)
+                    spawn(3,43,0)
+                    break
+                case 5:
+                    spawn(3,73,0)
+                    spawn(3,73,0)
+                    spawn(3,73,0)
+                    break
+                case 6:
+                    spawn(5,10,3)
+                    if(
+                        RandInt(2) == 0 && (!HasTrinket(22) || RandInt(5) == 0)
+                    ){
+                        spawn(5,10,3)
+                    }
+                    break
+                case 7:
+                    spawn(5,40,3)
+                    spawn(5,40,3)
+                    break
+                case 8:
+                    spawn(5,70,0)
+                    spawn(5,70,0)
+                    break
+                default:
+                    break
+            }
+            return     
         case 390:
-            //dk
+            if(!achievement_unlocked(415) && 未知逻辑A){
+                spawn(5,100,580)
+            }else{
+                spawn(5,100,ItemPool::GetCollectible(...))
+            }
+            return
         case 55:
-            //dk
+            List = new List
+            List.Add(0,HasTrinket(22) ? 9 : 43)
+            List.Add(1,42)
+            List.Add(2,10)
+            List.Add(3,5)
+            switch(List.SelectRandom()){
+                case 0:
+                    for(int i=0;i<RandInt(3)+1;i++){
+                        spawn(5,10,3)
+                    }
+                break
+                case 1:
+                    for(int i=0;i<3;i++){
+                        spawn(5,350,0)
+                    }
+                break
+                case 2:
+                    spawn(5,100,ItemPool::GetCollectible(27),...)
+                break
+                case 3:
+                    spawn(5,100,ItemPool::GetCollectible(4),...)
+                break
+            }
+            return
         case 69:
             //dk
     }
     //something dk
-
-
-
 }
+//nothing here!
+return
