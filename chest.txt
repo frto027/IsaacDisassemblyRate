@@ -1,5 +1,5 @@
 //GenerateChestDropList
-if(variant != 53 || stage_id == 11 ||  ! chest_is_first_open /* maybe */ || RandInt(4) != 0){
+if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  ! chest_is_first_open /* maybe */ || RandInt(4) != 0){
     //label 57
     switch(variant){
         case 56:
@@ -49,7 +49,7 @@ if(variant != 53 || stage_id == 11 ||  ! chest_is_first_open /* maybe */ || Rand
             return;
         case 360:
             //dk
-            if(stage_id == 11 && current_room_id == init_room_id){
+            if((stage_id == 11 && !IsGreedOrGreddier) && current_room_id == init_room_id){
                 spawn(5,100,ItemPool::GetCollectible())
                 return
             }
@@ -144,8 +144,73 @@ if(variant != 53 || stage_id == 11 ||  ! chest_is_first_open /* maybe */ || Rand
             return
         case 69:
             //dk
+            List = new List
+            if(SubType == 2){
+                List.Add(40,15)             // spawn 5.40.0
+                List.Add(0x6000A,10)        // spawn 5.10.6
+                List.Add(0xB000A,5)         // spawn 5.10.11
+                List.Add(70,15)             // spawn 5.70.15
+            }else{
+                List.Add(40,15)
+                List.Add(30,20)
+                List.Add(20,15)
+                List.Add(90,4)
+                List.Add(300,4)
+            }
+            count = RandInt(2) + 2
+            for(int i=0;i<count;i++){
+                random_item = List.SelectRandom()
+                //0x6000A和0xB000A的计算结果见上面的spawn注释
+                s_variant = random_item & 0xFFFF
+                s_subtype = (random_item >> 16) & 0xFFFF
+                spawn(5,s_variant, s_subtype)
+
+                if(SubType == 2 && s_subtype == 10){
+                    List.Add(0x6000A,-10)
+                    List.Add(0xB000A,-5)
+                }
+            }
+            return
     }
     //something dk
+    if(
+        (stage_id == 11 && !IsGreedOrGreddier) ||
+        variant == 57 && RandInt(2) == 0
+    ){
+        spawn(5,100,ItemPool::GetCollectible(0,...))
+        if(variant == 0x57){
+            spawn(5,100,ItemPool:GetCollectible(0,...))
+        }
+        return
+    }
+    List = new List
+    if((variant == 60 || variant == 51 || variant == 53 || variant == 57) && HasTrinket(159)){
+        List.Add(7,80)
+        if(variant != 57){
+            List.Add(6,20)
+        }else{
+            // do nothing
+        }
+    }else{
+        List.Add(0,10)
+        if(variant != 57){
+            List.Add(1,1)
+            List.Add(2,1)
+            if(variant == 60 || variant == 51 || variant == 53 || variant == 57){
+                List.Add(5,10)
+                if(variant != 57){
+                    List.Add(6,20)
+                }
+                List.Add(3,58)
+            }else{
+                List.Add(4,10)
+                List.Add(3,78)
+            }
+        }
+    }
+    Label 182:
+    //太长了，894行的while(1)死循环。
+    //下次分析
 }
 //nothing here!
 return
