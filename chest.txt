@@ -149,7 +149,7 @@ if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  chest_is_first_op
                 List.Add(40,15)             // spawn 5.40.0
                 List.Add(0x6000A,10)        // spawn 5.10.6
                 List.Add(0xB000A,5)         // spawn 5.10.11
-                List.Add(70,15)             // spawn 5.70.15
+                List.Add(70,15)             // spawn 5.70.0
             }else{
                 List.Add(40,15)
                 List.Add(30,20)
@@ -246,70 +246,70 @@ if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  chest_is_first_op
                     if(HasTrinket(42)){
                         sub_count++
                     }
-                    if(HasCollectible(199)){
+                }
+                if(HasCollectible(199)){
+                    sub_count *= 2
+                }
+                if(HasTrinket(76)){
+                    if(RandInt(2) != 0){
+                        spawn(18,0,0)
+                        sub_count = 0
+                    }else{
                         sub_count *= 2
                     }
-                    if(HasTrinket(76)){
-                        if(RandInt(2) != 0){
-                            spawn(18,0,0)
-                            sub_count = 0
-                        }else{
-                            sub_count *= 2
-                        }
-                    }
-                    SubList = new List
-                    if(selected == 7){
-                        SubList.Add(0,25)
-                        SubList.Add(1, HasTrinket(22) ? 4 : 20)
-                        SubList.Add(2,10)
-                        SubList.Add(3,20)
-                        SubList.Add(4,5)
-                        SubList.Add(5,5)
-                        SubList.Add(6,5)
-                        SubList.Add(7,5)
-                        SubList.Add(8,5)
-                    }else{
-                        SubList.Add(0,35)
-                        SubList.Add(1,HasTrinket(22) ? 4:20)
-                        SubList.Add(2,15)
-                        SubList.Add(3,30)
-                    }
-                    for(int j=0;j<sub_count;j++){
-                        switch(SubList.SelectRandom()){
-                            case 0:
-                                for(int i=0;i<RandInt(3)+1;i++){
-                                    spawn(5,20,0)
-                                }
-                                break
-                            case 1:
-                                spawn(5,10,0)
-                                break
-                            case 2:
-                                spawn(5,30,0)
-                                break
-                            case 3:
-                                spawn(5,40,0)
-                                break
-                            case 4:
-                                spawn(5,70,0)
-                                break
-                            case 5:
-                                spawn(5,300,0)
-                                break
-                            case 6:
-                                x = sub_1211750(RandInt(),0,1,1) //dk 1102
-                                spawn(5,300,x)
-                                break
-                            case 7:
-                                spawn(5,350,0)
-                                break
-                            case 8:
-                                spawn(5,90,0)
-                                break
-                        }
+                }
+                SubList = new List
+                if(selected == 7){
+                    SubList.Add(0,25)
+                    SubList.Add(1, HasTrinket(22) ? 4 : 20)
+                    SubList.Add(2,10)
+                    SubList.Add(3,20)
+                    SubList.Add(4,5)
+                    SubList.Add(5,5)
+                    SubList.Add(6,5)
+                    SubList.Add(7,5)
+                    SubList.Add(8,5)
+                }else{
+                    SubList.Add(0,35)
+                    SubList.Add(1,HasTrinket(22) ? 4:20)
+                    SubList.Add(2,15)
+                    SubList.Add(3,30)
+                }
+                for(int j=0;j<sub_count;j++){
+                    switch(SubList.SelectRandom()){
+                        case 0:
+                            for(int i=0;i<RandInt(3)+1;i++){
+                                spawn(5,20,0)
+                            }
+                            break
+                        case 1:
+                            spawn(5,10,0)
+                            break
+                        case 2:
+                            spawn(5,30,0)
+                            break
+                        case 3:
+                            spawn(5,40,0)
+                            break
+                        case 4:
+                            spawn(5,70,0)
+                            break
+                        case 5:
+                            spawn(5,300,0)
+                            break
+                        case 6:
+                            x = ItemPool:GetCard(seed = RandInt(),playing = 0,rune = 1, onlyrune = 1) //select a rune x
+                            spawn(5,300,x)
+                            break
+                        case 7:
+                            spawn(5,350,0)
+                            break
+                        case 8:
+                            spawn(5,90,0)
+                            break
                     }
                 }
-                //981 Label 211
+                break
             case 4:
                 spawn(5,70,0)
                 break
