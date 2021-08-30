@@ -1,5 +1,5 @@
 //GenerateChestDropList
-if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  ! chest_is_first_open /* maybe */ || RandInt(4) != 0){
+if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  chest_is_first_open /* maybe */ || RandInt(4) != 0){
     //label 57
     switch(variant){
         case 56:
@@ -32,7 +32,7 @@ if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  ! chest_is_first_
             }
             result = List.SelectRandom()
             if(result == 0){
-                spawn(5,100,ItemPool:GetCollectible(...))
+                spawn(5,100,ItemPool:GetCollectible(29))
             }else if(result == 1){
                 for(int i=0;i<count;i++){
                     spawn(5,300,0)
@@ -50,7 +50,7 @@ if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  ! chest_is_first_
         case 360:
             //dk
             if((stage_id == 11 && !IsGreedOrGreddier) && current_room_id == init_room_id){
-                spawn(5,100,ItemPool::GetCollectible())
+                spawn(5,100,ItemPool::GetCollectible(3))
                 return
             }
             List = new List
@@ -67,7 +67,7 @@ if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  ! chest_is_first_
             List.Add(8,15)
             switch(List.SelectRandom()){
                 case 0:
-                    spawn(5,100,ItemPool::GetCollectible(...))
+                    spawn(5,100,ItemPool::GetCollectible(9))
                     break
                 case 1:
                     //运行发现，去了恶魔房
@@ -114,7 +114,7 @@ if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  ! chest_is_first_
             if(!achievement_unlocked(415) && 未知逻辑A){
                 spawn(5,100,580)
             }else{
-                spawn(5,100,ItemPool::GetCollectible(...))
+                spawn(5,100,ItemPool::GetCollectible(15))
             }
             return
         case 55:
@@ -135,10 +135,10 @@ if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  ! chest_is_first_
                     }
                 break
                 case 2:
-                    spawn(5,100,ItemPool::GetCollectible(27),...)
+                    spawn(5,100,ItemPool::GetCollectible(27))
                 break
                 case 3:
-                    spawn(5,100,ItemPool::GetCollectible(4),...)
+                    spawn(5,100,ItemPool::GetCollectible(4))
                 break
             }
             return
@@ -172,14 +172,13 @@ if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  ! chest_is_first_
             }
             return
     }
-    //something dk
     if(
         (stage_id == 11 && !IsGreedOrGreddier) ||
         variant == 57 && RandInt(2) == 0
     ){
-        spawn(5,100,ItemPool::GetCollectible(0,...))
+        spawn(5,100,ItemPool::GetCollectible(0))
         if(variant == 0x57){
-            spawn(5,100,ItemPool:GetCollectible(0,...))
+            spawn(5,100,ItemPool:GetCollectible(0))
         }
         return
     }
@@ -209,8 +208,121 @@ if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  ! chest_is_first_
         }
     }
     Label 182:
-    //太长了，894行的while(1)死循环。
-    //下次分析
+    count = variant == 57 ? 5 : 1
+    for(int i=0;i<count;i++){
+        selected = List.SelectRandom()
+        switch(selected){
+            case 0:
+                spawn(5,350,0)
+                break
+            case 1:
+                spawn(5,50,0)
+                break
+            case 2:
+                spawn(5,60,0)
+                break
+            case 3:
+            case 7:
+                sub_count = RandInt((variant == 60 || variant == 51 || variant == 53 || variant == 57) ? 7 : 4)
+                if(sub_count < 2){
+                    sub_count = 2
+                }
+                if(RandInt(3) != 0){
+                    //929
+                    if(HasTrinket(45) && RandInt(2) == 0){
+                        spawn(5,300,0)
+                    }else if(HasTrinket(44) && RandInt(2) == 0){
+                        spawn(5,70,0)
+                    }else if(HasTrinket(41) && RandInt(2) == 0){
+                        spawn(5,40,0)
+                    }else if(HasTrinket(34) && RandInt(2) != 0 &&
+                        !(HasTrinket(22) && RandInt(5）!= 0))
+                    ){
+                        spawn(5,10,0)
+                    }else if(HasTrinket(36) && RandInt(2) == 0){
+                        spawn(5,30,0)
+                    }
+                    //label 209
+                    if(HasTrinket(42)){
+                        sub_count++
+                    }
+                    if(HasCollectible(199)){
+                        sub_count *= 2
+                    }
+                    if(HasTrinket(76)){
+                        if(RandInt(2) != 0){
+                            spawn(18,0,0)
+                            sub_count = 0
+                        }else{
+                            sub_count *= 2
+                        }
+                    }
+                    SubList = new List
+                    if(selected == 7){
+                        SubList.Add(0,25)
+                        SubList.Add(1, HasTrinket(22) ? 4 : 20)
+                        SubList.Add(2,10)
+                        SubList.Add(3,20)
+                        SubList.Add(4,5)
+                        SubList.Add(5,5)
+                        SubList.Add(6,5)
+                        SubList.Add(7,5)
+                        SubList.Add(8,5)
+                    }else{
+                        SubList.Add(0,35)
+                        SubList.Add(1,HasTrinket(22) ? 4:20)
+                        SubList.Add(2,15)
+                        SubList.Add(3,30)
+                    }
+                    for(int j=0;j<sub_count;j++){
+                        switch(SubList.SelectRandom()){
+                            case 0:
+                                for(int i=0;i<RandInt(3)+1;i++){
+                                    spawn(5,20,0)
+                                }
+                                break
+                            case 1:
+                                spawn(5,10,0)
+                                break
+                            case 2:
+                                spawn(5,30,0)
+                                break
+                            case 3:
+                                spawn(5,40,0)
+                                break
+                            case 4:
+                                spawn(5,70,0)
+                                break
+                            case 5:
+                                spawn(5,300,0)
+                                break
+                            case 6:
+                                x = sub_1211750(RandInt(),0,1,1) //dk 1102
+                                spawn(5,300,x)
+                                break
+                            case 7:
+                                spawn(5,350,0)
+                                break
+                            case 8:
+                                spawn(5,90,0)
+                                break
+                        }
+                    }
+                }
+                //981 Label 211
+            case 4:
+                spawn(5,70,0)
+                break
+            case 5:
+                spawn(5,300,0)
+                break
+            case 6:
+                spawn(5,100,ItemPool:GetCollectible(8))
+                break
+            default:
+                break
+        }
+    }
+    return
 }
-//nothing here!
 return
