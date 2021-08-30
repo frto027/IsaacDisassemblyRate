@@ -177,7 +177,7 @@ if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  chest_is_first_op
         variant == 57 && RandInt(2) == 0
     ){
         spawn(5,100,ItemPool::GetCollectible(0))
-        if(variant == 0x57){
+        if(variant == 57){
             spawn(5,100,ItemPool:GetCollectible(0))
         }
         return
@@ -187,8 +187,6 @@ if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  chest_is_first_op
         List.Add(7,80)
         if(variant != 57){
             List.Add(6,20)
-        }else{
-            // do nothing
         }
     }else{
         List.Add(0,10)
