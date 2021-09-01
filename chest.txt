@@ -193,16 +193,16 @@ if(variant != 53 || (stage_id == 11 && !IsGreedOrGreddier) ||  chest_is_first_op
         if(variant != 57){
             List.Add(1,1)
             List.Add(2,1)
-            if(variant == 60 || variant == 51 || variant == 53 || variant == 57){
-                List.Add(5,10)
-                if(variant != 57){
-                    List.Add(6,20)
-                }
-                List.Add(3,58)
-            }else{
-                List.Add(4,10)
-                List.Add(3,78)
+        }
+        if(variant == 60 || variant == 51 || variant == 53 || variant == 57){
+            List.Add(5,10)
+            if(variant != 57){
+                List.Add(6,20)
             }
+            List.Add(3,58)
+        }else{
+            List.Add(4,10)
+            List.Add(3,78)
         }
     }
     Label 182:
