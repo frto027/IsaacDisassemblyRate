@@ -1,0 +1,48 @@
+float LibraMaxFireDelay(float score){
+    if(score <= -2){
+        return 10000
+    }else{
+        return 30 / pow((score + 2) * 0.47161114, 1.3333334) - 1
+    }
+}
+
+float LibraDamage(float score){
+    if(score <= -2){
+        return 0
+    }else{
+        return pow((score + 2) * 0.54084867, 1.4084507)
+    }
+}
+
+float LibraRange(float score){
+    return (score - 2) * 60 + 230
+}
+
+
+
+void EntityPlayer::EvaluateItems(){
+//省略大量代码
+...
+
+    //CacheFlags表示哪些属性应该被修改，前面已经设置了0x1B，可以忽略
+    //player.MoveSpeed是面板值
+    //player.MaxFireDelay ???
+    //player.Damage是面板值
+    //player.Range除以40是面板值
+    if((player.HasCollectible(304) || player.GetZodiacEffect() == 304) && 
+        (player.CacheFlags & 0x1B) != 0)
+    {
+        a = sqrt(player.Damage * 30 / (player->MaxFireDelay + 1.0))
+        b = pow(a, 0.64999998) * 0.21616161 - 2.0
+        score = (((player.Range - 230) / 60 + 2) + (player.MoveSpeed * 4.5 - 2.0) + b * 2) * 0.25
+
+        player.MoveSpeed = (score + 2) / 4.5
+        player.MaxFireDelay = LibraMaxFireDelay(score)
+        player.Damage = LibraDamage(score)
+        player.Range = LibraRange(score)
+        player.CacheFlags |= 0x1B
+    }
+
+//省略大量代码
+...
+}
