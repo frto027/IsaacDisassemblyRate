@@ -10,7 +10,9 @@ if(Variant == 0){
     //这里处理spawn 5.0.x
     WeightList = new WeightList()
 
-    if(SubType != 3){
+    OldSubType = SubType
+
+    if(OldSubType != 3){
         WeightList.Add(20,20)
     }
 
@@ -52,7 +54,7 @@ if(Variant == 0){
         }//497行
     }
     rndDouble = RandomDouble() /* rndDouble是0~1之间的小数 */
-    if(SubType == 3 || Variant == 20 || ! HasTrinket(84) || rndDouble >= 0.1){
+    if(OldSubType == 3 || Variant == 20 || ! HasTrinket(84) || rndDouble >= 0.1){
         if(Variant != 90 && HasTrinket(72) && rndDouble >= 0.1 && rndDouble < 0.2){
             Variant = 90
         }
