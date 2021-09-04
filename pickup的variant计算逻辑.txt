@@ -20,7 +20,6 @@ if(Variant == 0){
     if(SubType != 1 && SubType != 3 && SubType != 4){
         WeightList.Add(50,5)
         WeightList.Add(60,5)
-        WeightList.Add()
     }//276行
 
     WeightList.Add(70,4)
@@ -36,13 +35,14 @@ if(Variant == 0){
     }
 
     Variant = WeightList.SelectRandomItem()
-
+    SubType = 0
 
     //Variant初始值已经生成，但还会有概率变化
 
     if(Variant == 10 && HasTrinket(22)){
         if(RandInt(5) != 0){
-            if(SubType != 3){
+            WeightList2 = new WeightList()
+            if(SubType != 3){// BUG？
                 WeightList2.Add(20,20)
             }
             WeightList2.Add(30,15)
