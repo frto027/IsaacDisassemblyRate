@@ -33,7 +33,7 @@ void EntityPlayer::EvaluateItems(){
         (player.CacheFlags & 0x1B) != 0)
     {
         a = sqrt(player.Damage * 30 / (player->MaxFireDelay + 1.0))
-        b = pow(a, 0.64999998) * 0.21616161 - 2.0
+        b = pow(a, 0.64999998) * 2.1616161 - 2.0
         score = (((player.Range - 230) / 60 + 2) + (player.MoveSpeed * 4.5 - 2.0) + b * 2) * 0.25
 
         player.MoveSpeed = (score + 2) / 4.5
