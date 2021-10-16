@@ -1,0 +1,60 @@
+void * EntityPlayer::UseActiveItem(EntityPlayer * player, ...){
+	...
+
+	switch(item_id){
+		...
+		case 406:{
+			//D8
+
+			player.D8_DamageMul=rng.NextDouble()
+			player.D8_MoveSpeedMul=rng.NextDouble()
+			player.D8_RangeMul=rng.NextDouble()
+			player.D8_TearsMul=rng.NextDouble()
+
+			for(int i=0;i<5;i++){
+				sum = player->D8_MoveSpeedMul + player.D8_DamageMul + player->D8_RangeMul + player->D8_TearsMul
+				base = (2.0 - sum) * 0.25
+
+				player->D8_DamageMul = min(1, max(0, base + player->D8_DamageMul))
+				player->D8_MoveSpeedMul = min(1, max(0, base + player->D8_MoveSpeedMul))
+				player->D8_RangeMul = min(1, max(0, base + player->D8_RangeMul))
+				player->D8_TearsMul = min(1, max(0, base + player->D8_TearsMul))
+			}
+
+			if(player->DamageMul >= 0.5){
+				player->DamageMul *= 2
+			}else{
+				player->DamageMul += 0.5
+			}
+
+			if(player->MoveSpeedMul >= 0.5){
+				player->MoveSpeedMul *= 2
+			}else{
+				player->MoveSpeedMul += 0.5
+			}
+
+			if(player->D8_RangeMul >= 0.5){
+				player->D8_RangeMul *= 2
+			}else{
+				player->D8_RangeMul += 0.5
+			}
+
+			if(player->D8_TearsMul >= 0.5){
+				player->D8_TearsMul *= 2
+			}else{
+				player->D8_TearsMul += 0.5
+			}
+			player->CacheFlags |= 
+				CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_FIREDELAY |
+				CacheFlag.CACHE_RANGE | CacheFlag.CACHE_SPEED
+			player->EvaluateItems()
+			if(HasCollectible(584)){
+				//美德之书
+				...
+			}
+			break
+		}
+		...
+	}
+	...
+}
