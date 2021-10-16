@@ -21,29 +21,11 @@ void * EntityPlayer::UseActiveItem(EntityPlayer * player, ...){
 				player->D8_TearsMul = min(1, max(0, base + player->D8_TearsMul))
 			}
 
-			if(player->DamageMul >= 0.5){
-				player->DamageMul *= 2
-			}else{
-				player->DamageMul += 0.5
-			}
+			player->D8_DamageMul 		+= max(0.5, player->D8_DamageMul)
+			player->D8_MoveSpeedMul 	+= max(0.5, player->D8_MoveSpeedMul)
+			player->D8_RangeMul 	+= max(0.5, player->D8_RangeMul)
+			player->D8_TearsMul 	+= max(0.5, player->D8_TearsMul)
 
-			if(player->MoveSpeedMul >= 0.5){
-				player->MoveSpeedMul *= 2
-			}else{
-				player->MoveSpeedMul += 0.5
-			}
-
-			if(player->D8_RangeMul >= 0.5){
-				player->D8_RangeMul *= 2
-			}else{
-				player->D8_RangeMul += 0.5
-			}
-
-			if(player->D8_TearsMul >= 0.5){
-				player->D8_TearsMul *= 2
-			}else{
-				player->D8_TearsMul += 0.5
-			}
 			player->CacheFlags |= 
 				CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_FIREDELAY |
 				CacheFlag.CACHE_RANGE | CacheFlag.CACHE_SPEED
