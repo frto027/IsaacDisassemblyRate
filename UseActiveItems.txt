@@ -54,7 +54,40 @@ void * EntityPlayer::UseActiveItem(EntityPlayer * player, ...){
 			}
 			break
 		}
+
+		case 481:
+		{
+			if(player->?????? == 0){
+				// player->somelist是一个嵌入在player中的数组
+
+				first_property = player->some_list[0]
+				seconed_property = player->some_list[1]
+
+				shuffleList(player->some_list + 5, player->some_list, rng)
+
+				*first_property += 1
+				*seconed_property -= 1
+				player->EvaluateItems()
+
+				TemproryEffect::AddCollectibleEffect(481,1,1)
+			}
+			TemproryEffect::AddCollectibleEffect(481,1,1)
+			TemproryEffect::AddCollectibleEffect(481,1,1)
+			break
+		}
 		...
 	}
 	...
+}
+
+
+int * shuffleList(int *begin, int *end, RNG *rng){
+	int len = end - begin
+	for(int i=len-1;i>0;i--){
+		int target = rng:NextInt(i)
+		int temp = begin[i]
+		begin[i] = begin[target]
+		begin[target] = temp
+	}
+	return begin
 }
