@@ -1,0 +1,53 @@
+int EntityPlayer::AddCollectible(/* this pointer */ EntityPlayer *player, /* arguments */...){
+	...
+	switch(collectibleId){
+		case 240:{
+			int list[] = {0,1,2,3,4,5,6}
+			//shuffleList打乱一个列表，源码见UseActiveItems.txt
+			shuffleList(list+7,list, rng)
+
+			//注意这里是6项，而不是7项
+			for(int i=0;i<6;i++){
+				int delta = i < 4 ? 1 : -1
+
+				switch(list[i]){
+					case 0:
+						//MaxHeart是红心上限（一定是偶数），SoulHeart是魂心和黑心数量，单位都是半颗心
+						//BoneHeart骨心，单位是一颗心
+						if( player->??? == 0 /* 这个条件一般都能满足 */ && 
+							(player->MaxHeart + player->SoulHeart + 2 * player->BoneHeart > 2 || i < 4))
+						{
+								player->AddMaxHearts(delta * 2,0);//注意，这里可以扣除血量
+						}
+					break
+					//总共就6个属性，处理方式一样，不用关心对应关系
+					case 1：
+						player->ET_Prop1_Delta += delta
+					break
+					case 2：
+						player->ET_Prop2_Delta += delta
+					break
+					case 3：
+						player->ET_Prop3_Delta += delta
+					break
+					case 4：
+						player->ET_Prop4_Delta += delta
+					break
+					case 5：
+						player->ET_Prop5_Delta += delta
+					break
+					case 6：
+						player->ET_Prop6_Delta += delta
+					break 
+
+				}
+
+			}
+
+			break
+		}
+
+	}
+	...
+	player->EvaluateItems()
+}
