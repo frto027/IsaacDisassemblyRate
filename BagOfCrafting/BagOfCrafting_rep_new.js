@@ -1,7 +1,7 @@
 "use strict"
 //disassembly from Game
 
-function seed2str(seed){
+function str2seed(seed){
     if(seed.length != 9)
         return 0
     //"xxxx xxxx"
@@ -54,7 +54,7 @@ function seed2str(seed){
     }
     return 0
 }
-console.assert(seed2str('JKD9 Z0C9') == 1302889765)
+console.assert(str2seed('JKD9 Z0C9') == 1302889765)
 
 
 function bucket_sort_list_toint64(item_array){
@@ -456,4 +456,4 @@ function get_result(input_array, gameStartSeed){
 }
 
 let input_array = [0x8,0x2,0x16,0xc,8,8,9,0xf] //[0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x1n]
-console.log(get_result(input_array, seed2str('JKD9 Z0C9')))
+console.log(get_result(input_array, str2seed('JKD9 Z0C9')))
