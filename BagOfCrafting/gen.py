@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 
 itempool = r'D:\SteamLibrary\steamapps\common\The Binding of Isaac Rebirth\resources-dlc3\itempools.xml'
 items_metadata = r'D:\SteamLibrary\steamapps\common\The Binding of Isaac Rebirth\resources-dlc3\items_metadata.xml'
-
+items = r'D:\SteamLibrary\steamapps\common\The Binding of Isaac Rebirth\resources-dlc3\items.xml'
 with open(itempool,'rb') as f:
     itempool = f.read().decode('utf8')
 
@@ -57,6 +57,20 @@ for pool in itempool:
 
 output += "}\n"
 
+item_id_aid = {}
+with open(items, 'rb') as f:
+    items = f.read().decode('utf8')
+items = ET.fromstring(items)
+assert items.tag == 'items'
+for item in items:
+    if item.tag in ['passive', 'familiar','active']:
+        if 'achievement' in item.attrib:
+            assert not item.attrib['id'] in item_id_aid
+            item_id_aid[item.attrib['id']] = item.attrib['achievement']
+    else:
+        assert item.tag in ['trinket', 'null']
+
+
 with open(items_metadata, 'rb') as f:
     items_metadata = f.read().decode('utf8')
 items_metadata = ET.fromstring(items_metadata)
@@ -70,7 +84,12 @@ for item in items_metadata:
     if item.tag == 'item' :
         if prettyprint:
             output += "    "
-        output += item.attrib['id'] + ':{quality:' + item.attrib['quality'] + '},'
+        output += item.attrib['id'] + ':{quality:' + item.attrib['quality'] 
+
+        if item.attrib['id'] in item_id_aid:
+            output += ',achievement_id:'+item_id_aid[item.attrib['id']]
+
+        output += '},'
         if prettyprint:
             output += "\n"
 output += "}\n"

@@ -157,6 +157,21 @@ function GetItemConfig(item_id){
     console.assert(item_config_data[item_id] != undefined)
     return item_config_data[item_id]
 }
+function GetAchievementUnlocked(achievement_id){
+    if(achievement_id >= 0x27E)
+        return false
+    if(achievement_id == 0n)
+        return true
+        
+    if(false /* xxxx */)
+        return true
+
+    // I dont know what it is, maybe daily run
+    // if( cond1 == 2 && (cond2.x || cond2.y))
+    //     return true
+    return false
+}
+
 function get_result(input_array, gameStartSeed){
     console.assert(typeof gameStartSeed == 'bigint')
 
@@ -370,7 +385,13 @@ function get_result(input_array, gameStartSeed){
             
             // if(v72) yes, sure, v72 = something[select]
             let item_config = GetItemConfig(selected)
-            if(true /* TODO:lots of things about item_config, line 567 */){
+            console.log(item_config)
+            if(item_config != undefined && 
+                (
+                    item_config.achievement_id == undefined ||
+                    GetAchievementUnlocked(item_config.achievement_id)
+                )
+            ){
                 break
             }
             if(++retry_count >= 20)
@@ -381,7 +402,5 @@ function get_result(input_array, gameStartSeed){
     return Number(search_result.output)
 }
 
-let input_array = [0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x1n] //[0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x1n]
+let input_array = [0x8n,0x2n,0x16n,0xcn,8,8,9,0xfn] //[0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x1n]
 console.log(get_result(input_array, 1302889765n))
-
-
