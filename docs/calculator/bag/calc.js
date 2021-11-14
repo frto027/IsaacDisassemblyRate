@@ -1827,8 +1827,8 @@ function GetAchievementUnlocked(achievement_id){
     if(achievement_id == 0)
         return true
         
-    if(document.getElementById("achievement_unlocked").value /* xxxx */)
-        return true
+    if(document.getElementById("achievement_unlocked").checked /* xxxx */)
+       return true
 
     // I dont know what it is, maybe daily run
     // if( cond1 == 2 && (cond2.x || cond2.y))
