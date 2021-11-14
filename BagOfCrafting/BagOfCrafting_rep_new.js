@@ -93,30 +93,30 @@ function bucket_sort_list_toint64(item_array){
     return v12
 }
 
-console.assert(bucket_sort_list_toint64([0x16n,0x2n,0x16n,0x16n,0x16n,0x16n,0x16n,0x16n]) == 0x1616161616161602n)
+console.assert(bucket_sort_list_toint64([0x16,0x2,0x16,0x16,0x16,0x16,0x16,0x16]) == 0x1616161616161602n)
 
 // ===== begin BTree search =====
 let btree_nodes = {
     "0B73A168":{left:"1C7FDE60", upper:"1C7FDE28", right:"1C805818", over:true},
-    "1C7FDE60":{left:"0B73A168", upper:"1C7FDE98", right:"0B73A168", over:false, input:0x0101010101010101n,output:0x2Dn},
-    "1C7FDE28":{left:"1C7FDE98", upper:"0B73A168", right:"1C7FE160", over:false, input:0x0808080808080808n,output:0xB1n},
-    "1C805818":{left:"0B73A168", upper:"1C7FD5F0", right:"0B73A168", over:false, input:0x1D1D1D1D1D1D1D1Dn,output:0x24n},
-    "1C7FDE98":{left:"1C7FDE60", upper:"1C7FDE28", right:"1C7FD3F8", over:false, input:0x0202020202020202n,output:0x2AEn},
-    "1C7FE160":{left:"1C7FE128", upper:"1C7FDE28", right:"1C7FD430", over:false, input:0x1515151515151515n,output:0x55n},
-    "1C7FD5F0":{left:"1C7FD5B8", upper:"1C7FD430", right:"1C805818", over:false, input:0x1919191919191919n,output:0x244n},
-    "1C7FD3F8":{left:"1C7FE0B8", upper:"1C7FDE98", right:"1C7FD580", over:false, input:0x0404040404040404n,output:0xB6n},
-    "1C7FE128":{left:"1C7FE0F0", upper:"1C7FE160", right:"1C7FD510", over:false, input:0x0F0F0F0F0F0F0F0Fn,output:0x25n},
-    "1C7FD430":{left:"1C7FD468", upper:"1C7FE160", right:"1C7FD5F0", over:false, input:0x1616161616161616n,output:0x4Bn},
-    "1C7FD5B8":{left:"0B73A168", upper:"1C7FD5F0", right:"0B73A168", over:false, input:0x1818181818181818n,output:0x1E9n},
-    "1C7FE0B8":{left:"0B73A168", upper:"1C7FD3F8", right:"0B73A168", over:false, input:0x0303030303030303n,output:0x76n},
-    "1C7FD580":{left:"1C7FD3C0", upper:"1C7FD3F8", right:"1C7FD4A0", over:false, input:0x0606060606060606n,output:0x274n},
-    "1C7FE0F0":{left:"0B73A168", upper:"1C7FE128", right:"1C7FD4D8", over:false, input:0x0C0C0C0C0C0C0C0Cn,output:0x157n},
-    "1C7FD510":{left:"1C7FD548", upper:"1C7FE128", right:"0B73A168", over:false, input:0x0101010101010101n,output:0x1E3n},
-    "1C7FD468":{left:"0B73A168", upper:"1C7FD430", right:"0B73A168", over:false, input:0x1616161616161603n,output:0x28En},
-    "1C7FD3C0":{left:"0B73A168", upper:"1C7FD580", right:"0B73A168", over:false, input:0x0504040404040201n,output:0x14Bn},
-    "1C7FD4A0":{left:"0B73A168", upper:"1C7FD580", right:"0B73A168", over:false, input:0x0707010101010101n,output:0x27Fn},
-    "1C7FD4D8":{left:"0B73A168", upper:"1C7FE0F0", right:"0B73A168", over:false, input:0x0D0D0C0C0C0C0C0Cn,output:0xAFn},
-    "1C7FD548":{left:"0B73A168", upper:"1C7FD510", right:"0B73A168", over:false, input:0x10100F0F0F0F0F0F,output:0x1E3n},
+    "1C7FDE60":{left:"0B73A168", upper:"1C7FDE98", right:"0B73A168", over:false, input:0x0101010101010101n,output:0x2D},
+    "1C7FDE28":{left:"1C7FDE98", upper:"0B73A168", right:"1C7FE160", over:false, input:0x0808080808080808n,output:0xB1},
+    "1C805818":{left:"0B73A168", upper:"1C7FD5F0", right:"0B73A168", over:false, input:0x1D1D1D1D1D1D1D1Dn,output:0x24},
+    "1C7FDE98":{left:"1C7FDE60", upper:"1C7FDE28", right:"1C7FD3F8", over:false, input:0x0202020202020202n,output:0x2AE},
+    "1C7FE160":{left:"1C7FE128", upper:"1C7FDE28", right:"1C7FD430", over:false, input:0x1515151515151515n,output:0x55},
+    "1C7FD5F0":{left:"1C7FD5B8", upper:"1C7FD430", right:"1C805818", over:false, input:0x1919191919191919n,output:0x244},
+    "1C7FD3F8":{left:"1C7FE0B8", upper:"1C7FDE98", right:"1C7FD580", over:false, input:0x0404040404040404n,output:0xB6},
+    "1C7FE128":{left:"1C7FE0F0", upper:"1C7FE160", right:"1C7FD510", over:false, input:0x0F0F0F0F0F0F0F0Fn,output:0x25},
+    "1C7FD430":{left:"1C7FD468", upper:"1C7FE160", right:"1C7FD5F0", over:false, input:0x1616161616161616n,output:0x4B},
+    "1C7FD5B8":{left:"0B73A168", upper:"1C7FD5F0", right:"0B73A168", over:false, input:0x1818181818181818n,output:0x1E9},
+    "1C7FE0B8":{left:"0B73A168", upper:"1C7FD3F8", right:"0B73A168", over:false, input:0x0303030303030303n,output:0x76},
+    "1C7FD580":{left:"1C7FD3C0", upper:"1C7FD3F8", right:"1C7FD4A0", over:false, input:0x0606060606060606n,output:0x274},
+    "1C7FE0F0":{left:"0B73A168", upper:"1C7FE128", right:"1C7FD4D8", over:false, input:0x0C0C0C0C0C0C0C0Cn,output:0x157},
+    "1C7FD510":{left:"1C7FD548", upper:"1C7FE128", right:"0B73A168", over:false, input:0x0101010101010101n,output:0x1E3},
+    "1C7FD468":{left:"0B73A168", upper:"1C7FD430", right:"0B73A168", over:false, input:0x1616161616161603n,output:0x28E},
+    "1C7FD3C0":{left:"0B73A168", upper:"1C7FD580", right:"0B73A168", over:false, input:0x0504040404040201n,output:0x14B},
+    "1C7FD4A0":{left:"0B73A168", upper:"1C7FD580", right:"0B73A168", over:false, input:0x0707010101010101n,output:0x27F},
+    "1C7FD4D8":{left:"0B73A168", upper:"1C7FE0F0", right:"0B73A168", over:false, input:0x0D0D0C0C0C0C0C0Cn,output:0xAF},
+    "1C7FD548":{left:"0B73A168", upper:"1C7FD510", right:"0B73A168", over:false, input:0x10100F0F0F0F0F0Fn,output:0x1E3},
 }
 
 for(let address in btree_nodes){
@@ -159,45 +159,45 @@ console.assert(binary_tree_search_element(0x1616161616161616n).found_node.input 
 //========== test a combine ===========
 
 let rng_offsets = [
-    0x00000001n, 0x00000005n, 0x00000010n, 0x00000001n, 0x00000005n, 0x00000013n, 0x00000001n, 0x00000009n,
-    0x0000001Dn, 0x00000001n, 0x0000000Bn, 0x00000006n, 0x00000001n, 0x0000000Bn, 0x00000010n, 0x00000001n,
-    0x00000013n, 0x00000003n, 0x00000001n, 0x00000015n, 0x00000014n, 0x00000001n, 0x0000001Bn, 0x0000001Bn,
-    0x00000002n, 0x00000005n, 0x0000000Fn, 0x00000002n, 0x00000005n, 0x00000015n, 0x00000002n, 0x00000007n,
-    0x00000007n, 0x00000002n, 0x00000007n, 0x00000009n, 0x00000002n, 0x00000007n, 0x00000019n, 0x00000002n,
-    0x00000009n, 0x0000000Fn, 0x00000002n, 0x0000000Fn, 0x00000011n, 0x00000002n, 0x0000000Fn, 0x00000019n,
-    0x00000002n, 0x00000015n, 0x00000009n, 0x00000003n, 0x00000001n, 0x0000000En, 0x00000003n, 0x00000003n,
-    0x0000001An, 0x00000003n, 0x00000003n, 0x0000001Cn, 0x00000003n, 0x00000003n, 0x0000001Dn, 0x00000003n,
-    0x00000005n, 0x00000014n, 0x00000003n, 0x00000005n, 0x00000016n, 0x00000003n, 0x00000005n, 0x00000019n,
-    0x00000003n, 0x00000007n, 0x0000001Dn, 0x00000003n, 0x0000000Dn, 0x00000007n, 0x00000003n, 0x00000017n,
-    0x00000019n, 0x00000003n, 0x00000019n, 0x00000018n, 0x00000003n, 0x0000001Bn, 0x0000000Bn, 0x00000004n,
-    0x00000003n, 0x00000011n, 0x00000004n, 0x00000003n, 0x0000001Bn, 0x00000004n, 0x00000005n, 0x0000000Fn,
-    0x00000005n, 0x00000003n, 0x00000015n, 0x00000005n, 0x00000007n, 0x00000016n, 0x00000005n, 0x00000009n,
-    0x00000007n, 0x00000005n, 0x00000009n, 0x0000001Cn, 0x00000005n, 0x00000009n, 0x0000001Fn, 0x00000005n,
-    0x0000000Dn, 0x00000006n, 0x00000005n, 0x0000000Fn, 0x00000011n, 0x00000005n, 0x00000011n, 0x0000000Dn,
-    0x00000005n, 0x00000015n, 0x0000000Cn, 0x00000005n, 0x0000001Bn, 0x00000008n, 0x00000005n, 0x0000001Bn,
-    0x00000015n, 0x00000005n, 0x0000001Bn, 0x00000019n, 0x00000005n, 0x0000001Bn, 0x0000001Cn, 0x00000006n,
-    0x00000001n, 0x0000000Bn, 0x00000006n, 0x00000003n, 0x00000011n, 0x00000006n, 0x00000011n, 0x00000009n,
-    0x00000006n, 0x00000015n, 0x00000007n, 0x00000006n, 0x00000015n, 0x0000000Dn, 0x00000007n, 0x00000001n,
-    0x00000009n, 0x00000007n, 0x00000001n, 0x00000012n, 0x00000007n, 0x00000001n, 0x00000019n, 0x00000007n,
-    0x0000000Dn, 0x00000019n, 0x00000007n, 0x00000011n, 0x00000015n, 0x00000007n, 0x00000019n, 0x0000000Cn,
-    0x00000007n, 0x00000019n, 0x00000014n, 0x00000008n, 0x00000007n, 0x00000017n, 0x00000008n, 0x00000009n,
-    0x00000017n, 0x00000009n, 0x00000005n, 0x0000000En, 0x00000009n, 0x00000005n, 0x00000019n, 0x00000009n,
-    0x0000000Bn, 0x00000013n, 0x00000009n, 0x00000015n, 0x00000010n, 0x0000000An, 0x00000009n, 0x00000015n,
-    0x0000000An, 0x00000009n, 0x00000019n, 0x0000000Bn, 0x00000007n, 0x0000000Cn, 0x0000000Bn, 0x00000007n,
-    0x00000010n, 0x0000000Bn, 0x00000011n, 0x0000000Dn, 0x0000000Bn, 0x00000015n, 0x0000000Dn, 0x0000000Cn,
-    0x00000009n, 0x00000017n, 0x0000000Dn, 0x00000003n, 0x00000011n, 0x0000000Dn, 0x00000003n, 0x0000001Bn,
-    0x0000000Dn, 0x00000005n, 0x00000013n, 0x0000000Dn, 0x00000011n, 0x0000000Fn, 0x0000000En, 0x00000001n,
-    0x0000000Fn, 0x0000000En, 0x0000000Dn, 0x0000000Fn, 0x0000000Fn, 0x00000001n, 0x0000001Dn, 0x00000011n,
-    0x0000000Fn, 0x00000014n, 0x00000011n, 0x0000000Fn, 0x00000017n, 0x00000011n, 0x0000000Fn, 0x0000001An]
+    0x00000001, 0x00000005, 0x00000010, 0x00000001, 0x00000005, 0x00000013, 0x00000001, 0x00000009,
+    0x0000001D, 0x00000001, 0x0000000B, 0x00000006, 0x00000001, 0x0000000B, 0x00000010, 0x00000001,
+    0x00000013, 0x00000003, 0x00000001, 0x00000015, 0x00000014, 0x00000001, 0x0000001B, 0x0000001B,
+    0x00000002, 0x00000005, 0x0000000F, 0x00000002, 0x00000005, 0x00000015, 0x00000002, 0x00000007,
+    0x00000007, 0x00000002, 0x00000007, 0x00000009, 0x00000002, 0x00000007, 0x00000019, 0x00000002,
+    0x00000009, 0x0000000F, 0x00000002, 0x0000000F, 0x00000011, 0x00000002, 0x0000000F, 0x00000019,
+    0x00000002, 0x00000015, 0x00000009, 0x00000003, 0x00000001, 0x0000000E, 0x00000003, 0x00000003,
+    0x0000001A, 0x00000003, 0x00000003, 0x0000001C, 0x00000003, 0x00000003, 0x0000001D, 0x00000003,
+    0x00000005, 0x00000014, 0x00000003, 0x00000005, 0x00000016, 0x00000003, 0x00000005, 0x00000019,
+    0x00000003, 0x00000007, 0x0000001D, 0x00000003, 0x0000000D, 0x00000007, 0x00000003, 0x00000017,
+    0x00000019, 0x00000003, 0x00000019, 0x00000018, 0x00000003, 0x0000001B, 0x0000000B, 0x00000004,
+    0x00000003, 0x00000011, 0x00000004, 0x00000003, 0x0000001B, 0x00000004, 0x00000005, 0x0000000F,
+    0x00000005, 0x00000003, 0x00000015, 0x00000005, 0x00000007, 0x00000016, 0x00000005, 0x00000009,
+    0x00000007, 0x00000005, 0x00000009, 0x0000001C, 0x00000005, 0x00000009, 0x0000001F, 0x00000005,
+    0x0000000D, 0x00000006, 0x00000005, 0x0000000F, 0x00000011, 0x00000005, 0x00000011, 0x0000000D,
+    0x00000005, 0x00000015, 0x0000000C, 0x00000005, 0x0000001B, 0x00000008, 0x00000005, 0x0000001B,
+    0x00000015, 0x00000005, 0x0000001B, 0x00000019, 0x00000005, 0x0000001B, 0x0000001C, 0x00000006,
+    0x00000001, 0x0000000B, 0x00000006, 0x00000003, 0x00000011, 0x00000006, 0x00000011, 0x00000009,
+    0x00000006, 0x00000015, 0x00000007, 0x00000006, 0x00000015, 0x0000000D, 0x00000007, 0x00000001,
+    0x00000009, 0x00000007, 0x00000001, 0x00000012, 0x00000007, 0x00000001, 0x00000019, 0x00000007,
+    0x0000000D, 0x00000019, 0x00000007, 0x00000011, 0x00000015, 0x00000007, 0x00000019, 0x0000000C,
+    0x00000007, 0x00000019, 0x00000014, 0x00000008, 0x00000007, 0x00000017, 0x00000008, 0x00000009,
+    0x00000017, 0x00000009, 0x00000005, 0x0000000E, 0x00000009, 0x00000005, 0x00000019, 0x00000009,
+    0x0000000B, 0x00000013, 0x00000009, 0x00000015, 0x00000010, 0x0000000A, 0x00000009, 0x00000015,
+    0x0000000A, 0x00000009, 0x00000019, 0x0000000B, 0x00000007, 0x0000000C, 0x0000000B, 0x00000007,
+    0x00000010, 0x0000000B, 0x00000011, 0x0000000D, 0x0000000B, 0x00000015, 0x0000000D, 0x0000000C,
+    0x00000009, 0x00000017, 0x0000000D, 0x00000003, 0x00000011, 0x0000000D, 0x00000003, 0x0000001B,
+    0x0000000D, 0x00000005, 0x00000013, 0x0000000D, 0x00000011, 0x0000000F, 0x0000000E, 0x00000001,
+    0x0000000F, 0x0000000E, 0x0000000D, 0x0000000F, 0x0000000F, 0x00000001, 0x0000001D, 0x00000011,
+    0x0000000F, 0x00000014, 0x00000011, 0x0000000F, 0x00000017, 0x00000011, 0x0000000F, 0x0000001A]
 
 function RNG_Next(num, offset_id){
     let offset_a = rng_offsets[offset_id * 3]
     let offset_b = rng_offsets[offset_id * 3 + 1]
     let offset_c = rng_offsets[offset_id * 3 + 2]
-    num = num ^ ((num >> offset_a) & 0xFFFFFFFFn)
-    num = num ^ ((num << offset_b) & 0xFFFFFFFFn)
-    num = num ^ ((num >> offset_c) & 0xFFFFFFFFn)
-    return num
+    num = num ^ ((num >>> offset_a) & 0xFFFFFFFF)
+    num = num ^ ((num << offset_b) & 0xFFFFFFFF)
+    num = num ^ ((num >>> offset_c) & 0xFFFFFFFF)
+    return num >>> 0 /* to unsigned */
 }
 
 
@@ -215,7 +215,7 @@ function GetItemConfig(item_id){
 function GetAchievementUnlocked(achievement_id){
     if(achievement_id >= 0x27E)
         return false
-    if(achievement_id == 0n)
+    if(achievement_id == 0)
         return true
         
     if(false /* xxxx */)
@@ -228,9 +228,6 @@ function GetAchievementUnlocked(achievement_id){
 }
 
 function get_result(input_array, gameStartSeed){
-    if(typeof gameStartSeed == 'number')
-        gameStartSeed = BigInt(gameStartSeed)
-    console.assert(typeof gameStartSeed == 'bigint')
 
     let sorted_items = bucket_sort_list_toint64(input_array)
 
@@ -293,7 +290,7 @@ function get_result(input_array, gameStartSeed){
                 {id:26, weight:item_count[23] * 10.0}
             )
         }
-        if(gameStartSeed == 0n){
+        if(gameStartSeed == 0){
             throw "Error"
         }
 
@@ -459,5 +456,5 @@ function get_result(input_array, gameStartSeed){
     return Number(search_result.output)
 }
 
-let input_array = [0x8n,0x2n,0x16n,0xcn,8n,8n,9n,0xfn] //[0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x1n]
+let input_array = [0x8,0x2,0x16,0xc,8,8,9,0xf] //[0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x1n]
 console.log(get_result(input_array, seed2str('JKD9 Z0C9')))
