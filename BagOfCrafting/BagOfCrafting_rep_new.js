@@ -228,6 +228,8 @@ function GetAchievementUnlocked(achievement_id){
 }
 
 function get_result(input_array, gameStartSeed){
+    if(typeof gameStartSeed == 'number')
+        gameStartSeed = BigInt(gameStartSeed)
     console.assert(typeof gameStartSeed == 'bigint')
 
     let sorted_items = bucket_sort_list_toint64(input_array)
@@ -458,4 +460,4 @@ function get_result(input_array, gameStartSeed){
 }
 
 let input_array = [0x8n,0x2n,0x16n,0xcn,8n,8n,9n,0xfn] //[0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x1n]
-console.log(get_result(input_array, 1302889765n))
+console.log(get_result(input_array, seed2str('JKD9 Z0C9')))
