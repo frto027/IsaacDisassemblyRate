@@ -1,5 +1,4 @@
 "use strict"
-//it is not done...
 //disassembly from Game
 
 function seed2str(seed){
@@ -453,7 +452,7 @@ function get_result(input_array, gameStartSeed){
         }
         return selected
     }
-    return Number(search_result.output)
+    return search_result.output
 }
 
 let input_array = [0x8,0x2,0x16,0xc,8,8,9,0xf] //[0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x1n]
