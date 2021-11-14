@@ -2073,7 +2073,7 @@ let current_output = "unknown"
 function flush_ui(){
     for(let i=0;i<8;i++){
         let view = document.getElementById('view-'+i)
-        for(let j=0;j<28;j++){
+        for(let j=0;j<32;j++){
             view.classList.remove('bofsym_'+j)
         }
         view.className += 'bofsym_'+current_pool[i]
@@ -2106,7 +2106,7 @@ document.getElementById('scroll').addEventListener('click',()=>{
     flush_ui()
 })
 
-for(let i=1;i<26;i++){
+for(let i=1;i<30;i++){
     document.getElementById('add_btn_'+i).addEventListener('click',()=>{
         if(current_pool[7] != 0){
             for(let j=0;j<7;j++){

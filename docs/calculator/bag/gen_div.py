@@ -1,2 +1,2 @@
-for i in range(27):
-    print('<img id="btn_%d" class="bofsym_%d" />' %(i,i))
+for i in range(30):
+    print('<img id="add_btn_%d" class="bofsym bofsym_%d" />' %(i,i))
