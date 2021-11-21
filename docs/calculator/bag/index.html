@@ -2,6 +2,14 @@
 
 <body>
     <style>
+.collectible{
+    width: 32px;
+    height: 32px;
+    margin: 18px;
+    transform: scale(2);
+    image-rendering: pixelated;
+    background-image: url("Collectibles_sprite.png");
+}
 .bofsym{
     transform: scale(2);
     margin: 8px;
@@ -165,6 +173,8 @@
 
 </style>
 
+<link rel="stylesheet" type="text/css" href="collectibles.css">
+
 <img id="add_btn_1" class="bofsym bofsym_1" />
 <img id="add_btn_2" class="bofsym bofsym_2" />
 <img id="add_btn_3" class="bofsym bofsym_3" />
@@ -212,7 +222,8 @@ achievement unlocked:<input type="checkbox" checked id="achievement_unlocked">
 seed:
 <input id='seed_input' value="JV3G HT9S">
 <br>
-result:<input readonly id='output_textbox'>
+result:<input readonly id='output_textbox'><br>
+<img id="view-output" class="collectible collectibles_007" />
 <script type="text/javascript" src="calc.js?version=3"></script>
 
 </body>

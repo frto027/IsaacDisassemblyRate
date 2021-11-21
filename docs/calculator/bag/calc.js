@@ -2070,6 +2070,7 @@ console.log(get_result(input_array, str2seed('JKD9 Z0C9')))
 
 let current_pool = [0,0,0,0,0,0,0,0]
 let current_output = "unknown"
+let current_id = 0
 function flush_ui(){
     for(let i=0;i<8;i++){
         let view = document.getElementById('view-'+i)
@@ -2079,18 +2080,25 @@ function flush_ui(){
         view.className += 'bofsym_'+current_pool[i]
     }
     document.getElementById('output_textbox').value = current_output
+    let idstr = current_id + ""
+    while(idstr.length < 3)
+        idstr = '0' + idstr
+    document.getElementById('view-output').className = 'collectible collectibles_'+idstr
 }
 function flush_result(){
     if(current_pool[7] != 0){
         let seed = str2seed(document.getElementById('seed_input').value)
         if(seed == 0){
             current_output = "Invalid Seed!"
+            current_id = 0
         }else{
-            console.log(seed)
-            current_output = "Item " + get_result(current_pool, seed)    
+            let id = get_result(current_pool, seed) 
+            current_output = "Item " + id   
+            current_id = id
         }
     }else{
         current_output = "Not full"
+        current_id = 0
     }
 }
 flush_ui()
