@@ -1,0 +1,208 @@
+<html>
+
+<body>
+    <style>
+.collectible{
+    width: 32px;
+    height: 32px;
+    margin: 18px;
+    transform: scale(2);
+    image-rendering: pixelated;
+    background-image: url("Collectibles_sprite.png");
+}
+.bofsym{
+    transform: scale(2);
+    margin: 8px;
+    image-rendering: pixelated;
+}
+.bofsym_0{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -0px -0px;
+}
+.bofsym_1{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -16px -0px;
+}
+.bofsym_2{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -32px -0px;
+}
+.bofsym_3{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -48px -0px;
+}
+.bofsym_4{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -64px -0px;
+}
+.bofsym_5{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -80px -0px;
+}
+.bofsym_6{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -96px -0px;
+}
+.bofsym_7{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -112px -0px;
+}
+.bofsym_8{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -0px -16px;
+}
+.bofsym_9{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -16px -16px;
+}
+.bofsym_10{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -32px -16px;
+}
+.bofsym_11{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -48px -16px;
+}
+.bofsym_12{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -64px -16px;
+}
+.bofsym_13{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -80px -16px;
+}
+.bofsym_14{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -96px -16px;
+}
+.bofsym_15{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -112px -16px;
+}
+.bofsym_16{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -0px -32px;
+}
+.bofsym_17{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -16px -32px;
+}
+.bofsym_18{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -32px -32px;
+}
+.bofsym_19{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -48px -32px;
+}
+.bofsym_20{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -64px -32px;
+}
+.bofsym_21{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -80px -32px;
+}
+.bofsym_22{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -96px -32px;
+}
+.bofsym_23{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -112px -32px;
+}
+.bofsym_24{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -0px -48px;
+}
+.bofsym_25{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -16px -48px;
+}
+.bofsym_26{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -32px -48px;
+}
+.bofsym_27{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -48px -48px;
+}
+.bofsym_28{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -64px -48px;
+}
+.bofsym_29{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -80px -48px;
+}
+.bofsym_30{
+    width: 16px;
+    height: 16px;
+    background: url("ui_crafting.png") -96px -48px;
+}
+
+</style>
+
+<link rel="stylesheet" type="text/css" href="collectibles.css">
+
+腐化该隐合成袋探索Demo（非最优解）<br>
+
+seed:
+<input id='seed_input' value="JV3G HT9S">
+
+<br>
+
+考验浏览器水平的时候到了<br><button id="execute">给我搜！</button>
+
+<div id="tip"></div>
+
+<br>
+<div id="tab">
+    输入道具ID：<input id="cid">
+    <button id='search'>查</button>
+    <br><br>
+    <img id="view-0" class="bofsym_0" />
+    <img id="view-1" class="bofsym_0" />
+    <img id="view-2" class="bofsym_0" />
+    <img id="view-3" class="bofsym_0" />
+    <img id="view-4" class="bofsym_0" />
+    <img id="view-5" class="bofsym_0" />
+    <img id="view-6" class="bofsym_0" />
+    <img id="view-7" class="bofsym_0" />    
+</div>
+
+
+<script type="text/javascript" src="calc-enum.js?version=0"></script>
+
+</body>
+</html>
