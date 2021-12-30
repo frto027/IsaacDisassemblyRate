@@ -110,7 +110,7 @@ let btree_nodes = {
     "1C7FE0B8":{left:"0B73A168", upper:"1C7FD3F8", right:"0B73A168", over:false, input:0x0303030303030303n,output:0x76},
     "1C7FD580":{left:"1C7FD3C0", upper:"1C7FD3F8", right:"1C7FD4A0", over:false, input:0x0606060606060606n,output:0x274},
     "1C7FE0F0":{left:"0B73A168", upper:"1C7FE128", right:"1C7FD4D8", over:false, input:0x0C0C0C0C0C0C0C0Cn,output:0x157},
-    "1C7FD510":{left:"1C7FD548", upper:"1C7FE128", right:"0B73A168", over:false, input:0x0101010101010101n,output:0x1E3},
+    "1C7FD510":{left:"1C7FD548", upper:"1C7FE128", right:"0B73A168", over:false, input:0x1111111111111111n,output:0x1E3},
     "1C7FD468":{left:"0B73A168", upper:"1C7FD430", right:"0B73A168", over:false, input:0x1616161616161603n,output:0x28E},
     "1C7FD3C0":{left:"0B73A168", upper:"1C7FD580", right:"0B73A168", over:false, input:0x0504040404040201n,output:0x14B},
     "1C7FD4A0":{left:"0B73A168", upper:"1C7FD580", right:"0B73A168", over:false, input:0x0707010101010101n,output:0x27F},
@@ -455,5 +455,16 @@ function get_result(input_array, gameStartSeed){
     return search_result.output
 }
 
-let input_array = [0x8,0x2,0x16,0xc,8,8,9,0xf] //[0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x1n]
-console.log(get_result(input_array, str2seed('JKD9 Z0C9')))
+/*
+spawn 5.10.3
+spawn 5.20.2
+spawn 5.20.2
+spawn 5.20.2
+spawn 5.20.2
+spawn 5.40.1
+spawn 5.40.1
+spawn 5.40.1
+*/
+
+let input_array = [0x02,0xf,0xf,0xf,0xf,0x9,0x9,0x9] //[0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x16n,0x1n]
+console.log(get_result(input_array, str2seed('6477 HWDD')))
