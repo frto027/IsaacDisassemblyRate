@@ -8,5 +8,5 @@ These tools can't be run directly, but a page in the BOI Chinese wiki([the simul
 [the simulate tool](https://github.com/frto027/IsaacBagOfCraftingHuijiGadget) has the latest algorithm (version 1.7.9b or maybe newer if the game updates).
 
 [the search tool](https://github.com/frto027/IsaacDecraftingHuijiGadget) use the algorithm to search every recipes.
-it also contains the same algorithm in `C++ language`, which is compiled by `WebAssembly` toolchains.
+it also contains the same algorithm in `C++ language`, which is compiled by `WebAssembly` toolchains. The C++ version is very fast, on my computer it only took 45 seconds to search all the recipes, which is nearly impossible in JavaScript.
 you can find the latest algorithm in [the decrafting app's `get_result` function](https://github.com/frto027/IsaacDecraftingHuijiGadget/blob/master/src/App.vue), or [the cpp source](https://github.com/frto027/IsaacDecraftingHuijiGadget/blob/master/bofwasm/main.cpp).
