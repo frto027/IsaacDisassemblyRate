@@ -117,3 +117,31 @@ int RollCard(uint32_t seed, uint32_t SpecialAndObject, int32_t Rune, uint32_t Su
 		return 51;
 	return 0;
 }
+
+//Call Site：
+
+lua API function:
+int ItemPool:GetCard(seed, Playing, Rune, OnlyRune){
+	return RollCard(seed,
+		OnlyRune ? 0 : 25,
+		OnlyRune ? 1 : (Rune ? 10 : 0),
+		Playing ? 10 : 0,
+		1
+	);
+}
+
+//==================
+case 0x55:
+	RollCard(RNG(), 0x19, 0, 0xA, 1);
+
+case 0x107:
+	RollCard(RNG(), 0, 1, 0, 1);
+
+
+///////AddCollectible
+
+case 194: RollCard(,0x19,0,0xA,1)
+case 251: RollCard(,0x19,0,0xA,1)
+case 263: RollCard(,0,-1,0,1)
+case 451: RollCard(,0,0,0,0)
+case 624: RollCard(,15,0,1,0)RollCard(,25,0,5,0)RollCard(,25,0,5,0)RollCard(,25,0,5,0)RollCard(,25,0,5,0)
