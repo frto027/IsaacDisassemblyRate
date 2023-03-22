@@ -1,0 +1,119 @@
+CardType:
+
+tarot 			0
+suit  			1
+rune			2
+special			3
+object			4
+tarot_reverse	5
+
+
+//此函数在不同位置被调用，参数是概率。
+//参数说明：
+//SpecialAndObject / Rune / Suit 分别代表是否选择对应类型的卡牌。
+// 0：不选择
+// -1,1：必选中
+// 其它值x: 1/x概率选中
+// 判定顺序：按照SpecialAndObject -> Rune -> Suit -> Tarot依次判定。
+// 附带：符文碎片的判定，自杀之王和斗篷卡的角色判定
+
+
+int RollCard(uint32_t seed, uint32_t SpecialAndObject, int32_t Rune, uint32_t Suit, int IncludeObject = 1){
+
+	int FinalSelect(int selected){
+		if(selected >= 1 && selected < 22 && RandInt() % 7 == 0 && ItemConfigCard.IsAvaliable(selected))
+			selected += 55;
+
+		if(selected == 0){
+			Error("No unlocked cards/runes to pick from!\n");
+		}
+
+		//LABEL_99
+		if(SpecialAndObject && Game.HasPlayerID(31) && RandInt() % 10)
+			selected = 51;
+
+		return selected;
+	}
+
+	vector<int> SpecialAndObjectList, RuneList, SuitList, TarotList;
+	for(CardInfo card: AllCards){
+		if(card.GreedMode && GameIsGreedMode)
+			continue;
+		if(card.ID == 46 && Game.HasPlayerID(19))
+			continue;
+		if(!AchievementUnlocked(card.AchievementID))
+			continue;
+		if(card.ID == 55)
+			continue;
+		switch(card.Type){
+			case 0: // tarot
+				TarotList.push_back(card.ID);
+				break;
+			case 1: // suit
+				if(Suit){
+					SuitList.push_back(card.ID);
+				}
+				break;
+			case 2: //rune
+				if(Rune){
+					RuneList.push_back(card.ID);
+				}
+				break;
+			case 3: // special
+				if(SpecialAndObject){
+					SpecialAndObjectList.push_back(card.ID);
+				}
+				break;
+			case 4: // object
+				if(IncludeObject && SpecialAndObject){
+					SpecailAndObjectList.push_back(card.ID);
+				}
+				break;
+		}
+	}
+
+	//label 47
+	if(RuneList.size() > 0 || Rune == -1){
+		while(RuneList.size() < 6){
+			RuneList.push_back(0);
+		}
+	}
+	if(SpecialAndObject && RandInt() % SpecialAndObject == 0 && SpecialAndObjectList.size() > 0){
+		int selected = RandomSelectFrom(SpecialAndObjectList);
+		if(selected){
+			return FinalSelect(selected)
+		}
+	}
+	
+	if(Rune == -1){
+		Rune = 1;
+	}
+
+	if(Rune && RandInt() % Rune == 0){
+		int selected = RandomSelectFrom(RuneList);
+		if(selected)
+			return FinalSelect(selected);
+
+		if(Rune == 1 || RandomInt(5) == 0){
+			selected = 55;
+			if(SpecialAndObject && Game.HasPlayerID(31) && RandInt() % 10)
+				selected = 51;
+			return selected;
+		}
+	}
+
+	if(Suit && RandInt() % Suit == 0 && SuitList.size() > 0){
+		int selected = RandomSelectFrom(SuitList);
+		if(selected)
+			return FinalSelect(select);
+	}
+
+	if(TarotList.size() > 0){
+		return FinalSelect(RandomSelectFrom(TarotList));
+	}
+
+	Error("No unlocked cards/runes to pick from!\n");
+	if(SpecialAndObject && Game.HasPlayerID(31) && RandInt() % 10)
+		return 51;
+	return 0;
+}
