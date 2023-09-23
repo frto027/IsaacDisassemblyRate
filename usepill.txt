@@ -1,0 +1,27 @@
+case 19: telepills
+  
+  function tp_random_exclude_error(){
+    if(
+        !IsGreedMode() && 
+    	(stage >= 7 || !Game():GetStateFlag(GameStateFlag.STATE_BACKWARDS_PATH)) &&
+    	(stage_type != STAGETYPE_REPENTANCE && stage_type != STAGETYPE_REPENTANCE_B && (stage == 6 || stage == 5 && HasCurse(CURSE_OF_LABYRINTH)))
+    )
+      return 1
+    return 0
+  }
+
+  stage = xxx
+  if(HasCurse(CURSE_OF_LABYRINTH) && !IsGreedMode()){
+    stage++
+  }
+  if(HasCollectible(550) && !IsGreedMode() && stage == 6){
+	  include_error_room = 0
+  }else{
+      if(tp_random_exclude_error() && current_room_is_not_the_boss())
+      	include_error_room = 0 // 非贪婪、非回溯、非替代章节时，在第六层（或第五层超大层）、当前房间是boss 传送药不会传送到错误房
+      else
+      	include_error_room = 1
+  }
+
+  Game():MoveToRandomRoom(include_error_room, rng, pstage)
+
