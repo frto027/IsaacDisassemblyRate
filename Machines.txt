@@ -3,6 +3,7 @@ void DoSomethingIdk(){
     case 18: // Rotten Beggar 腐烂乞丐奖励
     if(!"Prize") break;
     if(RandInt(24) == 0){
+        Play("Teleport")
         Spawn(5,100,ItemPool:GetCollectible())
         break;//LABEL_549
     }
@@ -38,4 +39,26 @@ void DoSomethingIdk(){
         
     }
 
+}
+//投喂
+void SomeFunction2(){
+    ...
+    // when feed
+    this->feeded++
+    int total;
+    if(Variant == 13 || Variant == 18){
+        total = RandInt(2) + RandInt(3)
+        if(difficulty == 1) total = max(total, 2)
+    }else{
+        total = RandInt(2) + RandInt(4) + RandInt(4)
+        if(difficulty == 1) total = max(total, 5)
+    }
+    if(this->feeded > total){
+        this->feeded = RandInt(2) + 2
+        if(HasCollectible(46 LUCKY_FOOT))
+            this->feeded++
+        xx("PayPrize")
+    }else{
+        xx("PayNothing")
+    }
 }
