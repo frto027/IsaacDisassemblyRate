@@ -1,0 +1,41 @@
+void DoSomethingIdk(){
+    ...
+    case 18: // Rotten Beggar 腐烂乞丐奖励
+    if(!"Prize") break;
+    if(RandInt(24) == 0){
+        Spawn(5,100,ItemPool:GetCollectible())
+        break;//LABEL_549
+    }
+    if(RandInt(4) != 0){
+        if(RandInt(2) != 0){
+            spider_count = RandInt(3)+1
+            while(spider_count--){
+                ThrowBlueSpider()
+            }
+        }else{
+            AddBlueFly(RandInt(3)+1)
+        }
+        break;
+    }else{
+        int select = RandInt(6)
+        if(select == 0 && achievement_unlocked(391)){
+            //2491
+            Game:Spawn(5,10,11)
+            break;
+        }
+        if(0 < select && select < 3 && achievement_unlocked(411)){
+            Game.Spawn(5,10,12) // 腐心
+            break;
+        }
+        //2527
+        trinket = RandInt(8)
+        if(trinket < 4 && ItemPool_RemoveTrinket(Amap[trinket])){
+            Game:Spawn(5,350,Amap[trinket])
+        }else{
+            Fart();
+        }
+        break;
+        
+    }
+
+}
