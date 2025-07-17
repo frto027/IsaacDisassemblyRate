@@ -5,12 +5,19 @@ char some_spawn_5_pre_update_variant_and_subtype(unsigned int seed,
 
   //.................
   switch (*pVariant) {
+  case 55:
+    if (!*pSubtype)
+      *pSubtype = 1;
+    break; // TODO: maybe other code after break
+
   case 50:
     if (*pSubtype != 0) {
       if (*pVariant == 52 && HasTrinket(151)) {
         *pVariant = 54;
       }
-    } else {
+      break;
+    } 
+     
       if (0 == RandInt(0x28u)) {
         *pVariant = 54;
       } else if (0 == RandInt(0x14u)) {
@@ -37,16 +44,30 @@ char some_spawn_5_pre_update_variant_and_subtype(unsigned int seed,
           }
         }
       }
-
+    // case 60://TODO 眼瞎了，明天搞
       if (!RandInt(1600u)) {
         *pVariant = 53;
       }
+    case 51:
+    case 52:
+    case 53:
+    case 54:
+    case 56:
+    case 58:
 
       if (HasTrinket(61)) {
         *pVariant = 360;
       } else if (*pVariant == 52 && HasTrinket(151)) {
         *pVariant = 54;
       }
+
+      
+    case 57:
+    case 360:
+      if (*pSubtype) {
+        break;
+      }
+
       if (HasTrinket(159) && !HasTrinket(61) && *pVariant != 57) {
         *pVariant = 60;
       } else {
@@ -64,10 +85,7 @@ char some_spawn_5_pre_update_variant_and_subtype(unsigned int seed,
         } else {
           *pSubtype = 1;
         }
-      }
-
-      break;
-    }
+      }    
   }
   ///////////////..........
 }
